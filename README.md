@@ -4,9 +4,12 @@ Have you ever been typing notes on your computer to save them for an important p
 
 ### Key Features
 -Type anything, anywhere in the text area
+
 -Accessible from any browser
+
 -Easy organization
--Simplistic and elegant style
+
+-Simplistic and elegant style\n
 -Very easy to learn
 
 ### Technologies 
@@ -15,4 +18,4 @@ Database Data: Every account and all their notes will be stored in this database
 WebSocket Data: Allows users to save and load their notes, as their notes will be sent from the client to the server periodically (autosaving) and sent from the server to the client when opening the page (autoloading)
 
 ### Mockup Image
-![Mockup image of the website](tbd)
+![Mockup image of the website](https://github.com/MojoDallin/startup/blob/main/mockup.png)

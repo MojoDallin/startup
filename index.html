@@ -72,10 +72,20 @@
     </div>
 
     <div class="saveAndLoad" style="right: 60px; position: absolute; top: 500px; width: 75px;">
-        <button>Save Notes</button>
+        <button onclick="saveData()">Save Notes</button>
         <br>
         <br>
-        <button>Load Notes</button>
+        <button onclick="loadData()">Load Notes</button>
+        <script>
+            function saveData()
+            {
+                console.log("User has requested to save data")
+            }
+            function loadData()
+            {
+                console.log("User has requested to load data")
+            }
+        </script>
     </div>
 
     <div class="rename" style="right: 20px; bottom: 20px; position: absolute">

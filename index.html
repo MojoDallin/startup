@@ -4,7 +4,7 @@
 
 <div class="scrollingButtons" style="width: 100px; border: 1px solid black">
     <!--default width of buttons is 59 px-->
-    <button onclick="addPage()">New Page</button> <!--width is 78px-->
+    <button onclick="addPage()" id="newPage">New Page</button> <!--width is 78px-->
 
     <script>
         var index = 1
@@ -14,6 +14,7 @@
             var anotherPage = document.createElement("button");
             var title = "Page " + index;
             anotherPage.textContent = title;
+            anotherPage.id = "Page" + index;
             anotherPage.addEventListener("click", goToPage);
             anotherPage.addEventListener("dblclick", deletePage);
             document.querySelector(".scrollingButtons").append(anotherPage);
@@ -24,7 +25,7 @@
                 {
                     console.log("Wants to go to " + anotherPage.textContent);
                     console.log("This will be functional soon I hope");
-                    currentPageUserIsOn = anotherPage.textContent.substring(5, 6);
+                    currentPageUserIsOn = anotherPage.id.substring(4, 5);
                 }
             }
             var deleteIndex = 0;
@@ -72,7 +73,7 @@
     <script>
         function renamePage()
         {
-            console.log(currentPageUserIsOn);
+            document.getElementById("Page" + currentPageUserIsOn).textContent = document.getElementById("renameName").value;
         }
     </script>
 </div>

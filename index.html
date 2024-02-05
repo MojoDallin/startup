@@ -58,8 +58,8 @@
         </script>
     </div>
 
-    <div class="information" style="left: 10px; bottom: 17px; position: absolute; width: 128px; border: 1px solid black">
-        <label>Double click a page twice to delete it</label>
+    <div class="information" style="left: 10px; bottom: 17px; position: absolute; border: 1px solid black">
+        <a href="information.html"><button>Information</button></a>
     </div>
 
     <div class="loginSystem" style="right: 20px; top: 20px; position: absolute">
@@ -82,10 +82,13 @@
     </div>
 
     <div class="saveAndLoad" style="right: 60px; position: absolute; top: 500px; width: 75px;">
-        <button onclick="saveData()">Save Notes</button>
+        <button onclick="saveData()">Save Notes (realtime communication between client and server)</button>
         <br>
         <br>
-        <button onclick="loadData()">Load Notes</button>
+        <button onclick="loadData()">Load Notes (how content will be stored)</button>
+        <br>
+        <br>
+        <label>This and the extra notes will be removed when the save/load functionality is implemented</label>
         <script>
             function saveData()
             {

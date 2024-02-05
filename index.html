@@ -12,16 +12,20 @@
         <script>
             var index = 1
             var currentPageUserIsOn = 0;
+            
             function addPage()
             {
-                var anotherPage = document.createElement("button");
-                var title = "Page " + index;
-                anotherPage.textContent = title;
-                anotherPage.id = "Page" + index;
-                anotherPage.addEventListener("click", goToPage);
-                anotherPage.addEventListener("dblclick", deletePage);
-                document.querySelector(".scrollingButtons").append(anotherPage);
-                index++;
+                
+                    var anotherPage = document.createElement("button");
+                    var title = "Page " + index;
+                    anotherPage.textContent = title;
+                    anotherPage.id = "Page" + index;
+                    anotherPage.addEventListener("click", goToPage);
+                    anotherPage.addEventListener("dblclick", deletePage);
+                    document.querySelector(".scrollingButtons").append(anotherPage);
+                    index++;
+                    
+                
                 function goToPage()
                 {
                     if(anotherPage.textContent != "Delete?")
@@ -46,10 +50,15 @@
                     if(deleteIndex > 1)
                     {
                         anotherPage.remove();
+                        
                     }
                 }
             }
         </script>
+    </div>
+
+    <div class="information" style="left: 10px; bottom: 17px; position: absolute; width: 128px; border: 1px solid black">
+        <label>Double click a page twice to delete it</label>
     </div>
 
     <div class="loginSystem" style="right: 20px; top: 20px; position: absolute">

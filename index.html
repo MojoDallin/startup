@@ -12,10 +12,11 @@
         <script>
             var index = 1
             var currentPageUserIsOn = 0;
-            
+            var currentlyActivePages = 0;
             function addPage()
             {
-                
+                if(currentlyActivePages < 57)
+                {
                     var anotherPage = document.createElement("button");
                     var title = "Page " + index;
                     anotherPage.textContent = title;
@@ -24,8 +25,8 @@
                     anotherPage.addEventListener("dblclick", deletePage);
                     document.querySelector(".scrollingButtons").append(anotherPage);
                     index++;
-                    
-                
+                    currentlyActivePages++;
+                }
                 function goToPage()
                 {
                     if(anotherPage.textContent != "Delete?")
@@ -50,7 +51,7 @@
                     if(deleteIndex > 1)
                     {
                         anotherPage.remove();
-                        
+                        currentlyActivePages--;
                     }
                 }
             }

@@ -1,32 +1,27 @@
 <body>
     <main>
-        <div class="textBox" style="left: 150px; position: absolute">
+        <div class="textBox" style="left: 150px; position: absolute;">
             <textarea id="mainTextArea" name="mainTextArea" rows="84" cols="290"></textarea>
         </div>
     </main>
 
-    <div class="scrollingButtons" style="width: 100px; border: 1px solid black">
+    <div class="scrollingButtons" style="width: 100px; border: 1px solid black; height: 500px; overflow: scroll;">
         <!--default width of buttons is 59 px-->
         <button onclick="addPage()" id="newPage">New Page</button> <!--width is 78px-->
 
         <script>
             var index = 1
             var currentPageUserIsOn = 0;
-            var currentlyActivePages = 0;
             function addPage()
             {
-                if(currentlyActivePages < 57)
-                {
-                    var anotherPage = document.createElement("button");
-                    var title = "Page " + index;
-                    anotherPage.textContent = title;
-                    anotherPage.id = "Page" + index;
-                    anotherPage.addEventListener("click", goToPage);
-                    anotherPage.addEventListener("dblclick", deletePage);
-                    document.querySelector(".scrollingButtons").append(anotherPage);
-                    index++;
-                    currentlyActivePages++;
-                }
+                var anotherPage = document.createElement("button");
+                var title = "Page " + index;
+                anotherPage.textContent = title;
+                anotherPage.id = "Page" + index;
+                anotherPage.addEventListener("click", goToPage);
+                anotherPage.addEventListener("dblclick", deletePage);
+                document.querySelector(".scrollingButtons").append(anotherPage);
+                index++;
                 function goToPage()
                 {
                     if(anotherPage.textContent != "Delete?")
@@ -51,7 +46,6 @@
                     if(deleteIndex > 1)
                     {
                         anotherPage.remove();
-                        currentlyActivePages--;
                     }
                 }
             }

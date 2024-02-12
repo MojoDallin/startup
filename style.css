@@ -1,11 +1,11 @@
-main {
-    .textBox {
+body {
+    .mainTextArea {
         left: 150px;
         position: absolute;
+        width: 75%;
+        height: 95%;
     }
-}
 
-body {
     .scrollingButtons {
         width: 100px;
         border: 1px solid black;
@@ -34,5 +34,6 @@ body {
         right: 20px;
         bottom: 20px;
         position: absolute;
+        text-align: center;
     }
 }

@@ -20,7 +20,6 @@
                 anotherPage.id = "Page" + index;
                 anotherPage.addEventListener("click", goToPage);
                 anotherPage.addEventListener("dblclick", deletePage);
-                anotherPage.style.fontFamily = "cursive";
                 document.querySelector(".scrollingButtons").append(anotherPage);
                 index++;
                 function goToPage()
@@ -58,37 +57,20 @@
     </div>
 
     <div class="loginSystem">
-        <label>Username: </label>
-        <input type="text" id="name" name="name" size="10" maxlength="15"/>
+        <label style="font-family: cursive;">Username: </label>
+        <input type="text" id="name" name="name" size="10" maxlength="9"/>
         <br>
-        <label>Password: </label>
-        <input type="password" id="password" name="password" size="10" maxlength="15"/>
+        <label style="font-family: cursive;">Password: </label>
+        <input type="password" id="password" name="password" size="10" maxlength="9"/>
         <br>
-        <label id="curUser">Current User: </label>
+        <label style="font-family: cursive;" id="curUser">Current User: </label>
         <br>
-        <button onclick="login()">Log In</button>
+        <button style="font-family: cursive;" onclick="login()">Log In</button>
         <script>
             function login()
             {
                 console.log("User attempted to log in")
                 document.getElementById("curUser").textContent = "Current User: " + document.getElementById("name").value
-            }
-        </script>
-    </div>
-
-    <div class="saveAndLoad">
-        <button onclick="saveData()">Save Notes</button>
-        <br>
-        <br>
-        <button onclick="loadData()">Load Notes</button>
-        <script>
-            function saveData()
-            {
-                console.log("User has requested to save data")
-            }
-            function loadData()
-            {
-                console.log("User has requested to load data")
             }
         </script>
     </div>

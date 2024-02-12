@@ -2,7 +2,7 @@ body {
     background-color: darkgray;
 
     .mainTextArea {
-        left: 150px;
+        left: 200px;
         position: absolute;
         width: 85%;
         height: 95%;
@@ -20,11 +20,12 @@ body {
         display: flex;
         flex-direction: column;
         border-color: transparent;
-
-        .newPage {
-            font-family: cursive;
-        }
     }
+    .scrollingButtons * {
+        font-family: cursive;
+    }
+
+
     .infoButton {
         left: 10px;
         bottom: 20px;
@@ -37,12 +38,6 @@ body {
         top: 20px;
         position: absolute;
     }
-    .saveAndLoad {
-        right: 60px;
-        top: 500px;
-        width: 75px;
-        position: absolute;
-    }
     .rename {
         right: 20px;
         bottom: 20px;
@@ -52,5 +47,7 @@ body {
     .renameName {
         background-color: darkgray;
     }
-    
+    .renameButton {
+        font-family: cursive;
+    }
 }

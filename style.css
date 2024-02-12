@@ -1,14 +1,18 @@
 main {
-    left: 150px;
-    position: absolute;
+    .textBox {
+        left: 150px;
+        position: absolute;
+    }
 }
 
 body {
     .scrollingButtons {
         width: 100px;
         border: 1px solid black;
-        height: 500px;
+        height: 50%;
         overflow: scroll;
+        display: flex;
+        flex-direction: column;
     }
     .information {
         left: 10px;

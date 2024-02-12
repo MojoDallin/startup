@@ -7,8 +7,7 @@
     </main>
 
     <div class="scrollingButtons">
-        <!--default width of buttons is 59 px-->
-        <button onclick="addPage()" class="newPage" id="newPage">New Page</button> <!--width is 78px-->
+        <button onclick="addPage()" class="newPage" id="newPage">New Page</button>
 
         <script>
             var index = 1
@@ -55,7 +54,7 @@
     </div>
 
     <div class="information">
-        <a href="information.html"><button>Information</button></a>
+        <a href="information.html"><button class="infoButton">Information</button></a>
     </div>
 
     <div class="loginSystem">
@@ -95,9 +94,9 @@
     </div>
 
     <div class="rename">
-        <input type="text" id="renameName" name="renameName" size="10" maxlength="12">
+        <input type="text" class="renameName" id="renameName" name="renameName" size="10" maxlength="12">
         <br>
-        <button onclick="renamePage()">Rename Page</button>
+        <button onclick="renamePage()" class="renameButton">Rename Page</button>
 
         <script>
             function renamePage()

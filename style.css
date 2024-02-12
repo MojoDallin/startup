@@ -1,27 +1,36 @@
 body {
+    background-color: darkgray;
+
     .mainTextArea {
         left: 150px;
         position: absolute;
-        width: 75%;
+        width: 85%;
         height: 95%;
-    }
-
-    .newPage {
-        font-family: cursive;
+        background-color: darkgray;
+        color: black;
+        border-color: black;
     }
 
     .scrollingButtons {
-        width: 5%;
+        width: 125px;
         border: 1px solid black;
-        height: 50%;
+        height: 92.5%;
         overflow: scroll;
+        overflow-x: hidden;
         display: flex;
         flex-direction: column;
+        border-color: transparent;
+
+        .newPage {
+            font-family: cursive;
+        }
     }
-    .information {
+    .infoButton {
         left: 10px;
-        bottom: 16px;
+        bottom: 20px;
+        width: 110px;
         position: absolute;
+        font-family: cursive;
     }
     .loginSystem {
         right: 20px;
@@ -40,4 +49,8 @@ body {
         position: absolute;
         text-align: center;
     }
+    .renameName {
+        background-color: darkgray;
+    }
+    
 }

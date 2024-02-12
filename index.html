@@ -1,11 +1,12 @@
 <body>
     <main>
-        <div class="textBox" style="left: 150px; position: absolute;">
+        <div class="textBox">
             <textarea id="mainTextArea" name="mainTextArea" rows="84" cols="290"></textarea>
+            <link rel="stylesheet" href="style.css">
         </div>
     </main>
 
-    <div class="scrollingButtons" style="width: 100px; border: 1px solid black; height: 500px; overflow: scroll;">
+    <div class="scrollingButtons">
         <!--default width of buttons is 59 px-->
         <button onclick="addPage()" id="newPage">New Page</button> <!--width is 78px-->
 
@@ -52,11 +53,11 @@
         </script>
     </div>
 
-    <div class="information" style="left: 10px; bottom: 16px; position: absolute;">
+    <div class="information">
         <a href="information.html"><button>Information</button></a>
     </div>
 
-    <div class="loginSystem" style="right: 20px; top: 20px; position: absolute">
+    <div class="loginSystem">
         <label>Username: </label>
         <input type="text" id="name" name="name" size="10" maxlength="15"/>
         <br>
@@ -75,7 +76,7 @@
         </script>
     </div>
 
-    <div class="saveAndLoad" style="right: 60px; position: absolute; top: 500px; width: 75px;">
+    <div class="saveAndLoad">
         <button onclick="saveData()">Save Notes</button>
         <br>
         <br>
@@ -92,7 +93,7 @@
         </script>
     </div>
 
-    <div class="rename" style="right: 20px; bottom: 20px; position: absolute">
+    <div class="rename">
         <input type="text" id="renameName" name="renameName" size="10" maxlength="10">
         <br>
         <button onclick="renamePage()">Rename Page</button>

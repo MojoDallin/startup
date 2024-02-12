@@ -1,6 +1,34 @@
 main {
-    background-color: aqua;
+    left: 150px;
+    position: absolute;
 }
-textBox {
-    background-color: aqua;
+
+body {
+    .scrollingButtons {
+        width: 100px;
+        border: 1px solid black;
+        height: 500px;
+        overflow: scroll;
+    }
+    .information {
+        left: 10px;
+        bottom: 16px;
+        position: absolute;
+    }
+    .loginSystem {
+        right: 20px;
+        top: 20px;
+        position: absolute;
+    }
+    .saveAndLoad {
+        right: 60px;
+        top: 500px;
+        width: 75px;
+        position: absolute;
+    }
+    .rename {
+        right: 20px;
+        bottom: 20px;
+        position: absolute;
+    }
 }

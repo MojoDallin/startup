@@ -7,7 +7,7 @@ body {
     }
 
     .scrollingButtons {
-        width: 100px;
+        width: 5%;
         border: 1px solid black;
         height: 50%;
         overflow: scroll;

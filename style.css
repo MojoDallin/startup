@@ -6,6 +6,10 @@ body {
         height: 95%;
     }
 
+    .newPage {
+        font-family: cursive;
+    }
+
     .scrollingButtons {
         width: 5%;
         border: 1px solid black;

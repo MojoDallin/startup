@@ -21,6 +21,7 @@
                 anotherPage.id = "Page" + index;
                 anotherPage.addEventListener("click", goToPage);
                 anotherPage.addEventListener("dblclick", deletePage);
+                anotherPage.style.fontFamily = "cursive";
                 document.querySelector(".scrollingButtons").append(anotherPage);
                 index++;
                 function goToPage()

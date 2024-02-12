@@ -101,7 +101,9 @@
         <script>
             function renamePage()
             {
-                document.getElementById("Page" + currentPageUserIsOn).textContent = document.getElementById("renameName").value;
+                var txtCntnt = document.getElementById("renameName").value
+                if(currentPageUserIsOn > 0 && txtCntnt.length > 0)
+                    document.getElementById("Page" + currentPageUserIsOn).textContent = txtCntnt;
             }
         </script>
     </div>

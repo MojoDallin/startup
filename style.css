@@ -1,12 +1,12 @@
 body {
-    background-color: darkgray;
+    background-color: #4AC3EC;
 
     .mainTextArea {
         left: 200px;
         position: absolute;
-        width: 85%;
+        width: 80%;
         height: 95%;
-        background-color: darkgray;
+        background-color: transparent;
         color: black;
         border-color: black;
     }
@@ -24,14 +24,13 @@ body {
     .scrollingButtons * {
         font-family: cursive;
     }
-
-
     .infoButton {
         left: 10px;
         bottom: 20px;
         width: 110px;
         position: absolute;
         font-family: cursive;
+        background-color: #EC964A;
     }
     .loginSystem {
         right: 20px;
@@ -44,10 +43,8 @@ body {
         position: absolute;
         text-align: center;
     }
-    .renameName {
-        background-color: darkgray;
-    }
     .renameButton {
         font-family: cursive;
+        background-color: #EC964A;
     }
 }

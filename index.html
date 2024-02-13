@@ -7,7 +7,7 @@
     </main>
 
     <div class="scrollingButtons">
-        <button onclick="addPage()" class="newPage" id="newPage">New Page</button>
+        <button onclick="addPage()" class="newPage" id="newPage" style="background-color: #EC964A;">New Page</button>
 
         <script>
             var index = 1
@@ -20,12 +20,14 @@
                 anotherPage.id = "Page" + index;
                 anotherPage.addEventListener("click", goToPage);
                 anotherPage.addEventListener("dblclick", deletePage);
+                anotherPage.style.backgroundColor = "#EC964A";
                 document.querySelector(".scrollingButtons").append(anotherPage);
                 index++;
                 function goToPage()
                 {
                     if(anotherPage.textContent != "Delete?")
                     {
+                        anotherPage.style.backgroundColor = "#4AC3EC";
                         console.log("Wants to go to " + anotherPage.textContent);
                         console.log("This will be functional soon I hope");
                         currentPageUserIsOn = anotherPage.id.substring(4, 5);
@@ -76,7 +78,7 @@
     </div>
 
     <div class="rename">
-        <input type="text" class="renameName" id="renameName" name="renameName" size="10" maxlength="12">
+        <input type="text" class="renameName" id="renameName" name="renameName" size="10" maxlength="12" style="background-color: transparent;">
         <br>
         <button onclick="renamePage()" class="renameButton">Rename Page</button>
 

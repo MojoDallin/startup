@@ -36,6 +36,11 @@ body {
         right: 20px;
         top: 20px;
         position: absolute;
+        .loginButton {
+            right: 75px;
+            position: absolute;
+            background-color: #EC964A;
+        }
     }
     .rename {
         right: 20px;

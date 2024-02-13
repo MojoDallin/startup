@@ -60,14 +60,14 @@
 
     <div class="loginSystem">
         <label style="font-family: cursive;">Username: </label>
-        <input type="text" id="name" name="name" size="10" maxlength="9"/>
+        <input style="background-color: transparent" type="text" id="name" name="name" size="10" maxlength="10"/>
         <br>
         <label style="font-family: cursive;">Password: </label>
-        <input type="password" id="password" name="password" size="10" maxlength="9"/>
+        <input style="background-color: transparent;" type="password" id="password" name="password" size="10" maxlength="10"/>
         <br>
         <label style="font-family: cursive;" id="curUser">Current User: </label>
         <br>
-        <button style="font-family: cursive;" onclick="login()">Log In</button>
+        <button class="loginButton" style="font-family: cursive;" onclick="login()">Log In</button>
         <script>
             function login()
             {

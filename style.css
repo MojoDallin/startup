@@ -1,6 +1,11 @@
 body {
     background-color: #4AC3EC;
 
+    *{
+        font-family: Georgia, serif;
+        color: black;
+    }
+
     .mainTextArea {
         margin-left: 130px;
         position: absolute;
@@ -21,15 +26,11 @@ body {
         flex-direction: column;
         border-color: transparent;
     }
-    .scrollingButtons * {
-        font-family: cursive;
-    }
     .infoButton {
         left: 10px;
         bottom: 20px;
         width: 110px;
         position: absolute;
-        font-family: cursive;
         background-color: #EC964A;
     }
     .loginSystem {
@@ -49,7 +50,6 @@ body {
         text-align: center;
     }
     .renameButton {
-        font-family: cursive;
         background-color: #EC964A;
         width: 100px
     }

@@ -27,13 +27,20 @@
                 {
                     if(anotherPage.textContent != "Delete?")
                     {
-                        console.log(currentPageUserIsOn)
                         anotherPage.style.backgroundColor = "#4AC3EC";
                         if(currentPageUserIsOn > 0)
-                            document.getElementById("Page" + currentPageUserIsOn).style.backgroundColor = "#EC964A"
-                        console.log("Wants to go to " + anotherPage.textContent);
-                        console.log("This will be functional soon I hope");
-                        currentPageUserIsOn = anotherPage.id.substring(4);
+                        {
+                            try
+                            {
+                                if(document.getElementById("Page" + currentPageUserIsOn).textContent != "Delete?")
+                                    document.getElementById("Page" + currentPageUserIsOn).style.backgroundColor = "#EC964A"
+                            } catch(ex)
+                            {
+                                console.log("Failure")
+                            }
+                        }
+                        console.log("Wants to go to " + anotherPage.id + " from Page" + currentPageUserIsOn);
+                        currentPageUserIsOn = Number(anotherPage.id.substring(4));
                     }
                 }
                 var deleteIndex = 0;
@@ -42,15 +49,18 @@
                     var oldName = anotherPage.textContent
                     console.log("Wants to delete " + anotherPage.textContent);
                     anotherPage.textContent = "Delete?";
+                    anotherPage.style.backgroundColor = "#F34F4F";  
                     deleteIndex++;
                     setTimeout(() =>
                     {
                         anotherPage.textContent = oldName;
                         deleteIndex = 0;
+                        anotherPage.style.backgroundColor = "#EC964A"
                     }, 3000)
                     if(deleteIndex > 1)
                     {
                         anotherPage.remove();
+                        currentPageUserIsOn += 1
                     }
                 }
             }
@@ -74,7 +84,7 @@
         <script>
             function login()
             {
-                console.log("User attempted to log in")
+                console.log("User attempted to log in with user " + document.getElementById("name").value + " and password " + document.getElementById("password").value)
                 document.getElementById("curUser").textContent = "Current User: " + document.getElementById("name").value
             }
         </script>

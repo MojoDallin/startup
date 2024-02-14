@@ -27,12 +27,13 @@
                 {
                     if(anotherPage.textContent != "Delete?")
                     {
+                        console.log(currentPageUserIsOn)
                         anotherPage.style.backgroundColor = "#4AC3EC";
                         if(currentPageUserIsOn > 0)
                             document.getElementById("Page" + currentPageUserIsOn).style.backgroundColor = "#EC964A"
                         console.log("Wants to go to " + anotherPage.textContent);
                         console.log("This will be functional soon I hope");
-                        currentPageUserIsOn = anotherPage.id.substring(4, 5);
+                        currentPageUserIsOn = anotherPage.id.substring(4);
                     }
                 }
                 var deleteIndex = 0;

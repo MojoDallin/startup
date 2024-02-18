@@ -28,7 +28,7 @@ WebSocket Data: Allows users to save and load their notes, as their notes will b
 ### HTML
 -Added a base layout
 
--Added some functionality, such as renaming pages
+-Added some functionality, such as adding and renaming pages
 
 -Did information.html
 

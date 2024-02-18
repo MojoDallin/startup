@@ -22,3 +22,29 @@ WebSocket Data: Allows users to save and load their notes, as their notes will b
 
 ### Mockup Image
 ![Mockup image of the website](https://github.com/MojoDallin/startup/blob/main/mockup.png)
+
+
+# Recent
+### HTML
+-Added a base layout
+
+-Added some functionality, such as renaming pages
+
+-Did information.html
+
+-Deployed website
+
+
+### CSS
+-Vastly improved layout
+
+-Added a color combination that looks good
+
+
+-Squashed a few bugs
+
+-Added more functionality such as buttons changing color based on your page
+
+-Information.html cleaned up
+
+-Added a logo

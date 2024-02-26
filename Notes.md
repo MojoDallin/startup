@@ -7,7 +7,7 @@ A website, cool. All I need to remember is my url (http://34.199.128.37) and the
 ### Midterm Notes
 Padding puts space around content of selected elements.
 
-<div> creates a DIVISON element.
+div creates a DIVISON element.
   
 Order: Margin, Border, Padding, Content.
 
@@ -15,7 +15,7 @@ v.match(/A|f/i) will search for elements containing the letter a OR starting wit
 
 .addEventListener(called when, function to execute).
 
-<ul> is the tag for an unordered list.
+ul is the tag for an unordered list.
   
 function f(x) = {} is invalid.
 

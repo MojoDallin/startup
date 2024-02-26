@@ -19,13 +19,11 @@ ul is the tag for an unordered list.
   
 function f(x) = {} is invalid.
 
-<javascript>This does NOT work.</javascript>
-
 {n:1} is a valid javascript object.
 
 DOM textContent sets the child text for an element.
 
-<a href=""> creates a valid hyperlink.
+a href="" creates a valid hyperlink.
 
 {"x":3} is valid JSON.
 

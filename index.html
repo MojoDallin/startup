@@ -14,6 +14,7 @@
             var currentPageUserIsOn = 0;
             function addPage()
             {
+                //Called when New Page is clicked
                 var anotherPage = document.createElement("button");
                 var title = "Page " + index;
                 anotherPage.textContent = title;
@@ -25,6 +26,7 @@
                 index++;
                 function goToPage()
                 {
+                    //Called when a user switches pages
                     if(anotherPage.textContent != "Delete?")
                     {
                         anotherPage.style.backgroundColor = "#4AC3EC";
@@ -46,6 +48,7 @@
                 var deleteIndex = 0;
                 function deletePage()
                 {
+                    //Called when a user wants to delete a page
                     var oldName = anotherPage.textContent
                     console.log("Wants to delete " + anotherPage.textContent);
                     anotherPage.textContent = "Delete?";
@@ -84,6 +87,7 @@
         <script>
             function login()
             {
+                //Called when a user logs in
                 console.log("User attempted to log in with user " + document.getElementById("name").value + " and password " + document.getElementById("password").value)
                 document.getElementById("curUser").textContent = "Current User: " + document.getElementById("name").value
             }
@@ -98,6 +102,7 @@
         <script>
             function renamePage()
             {
+                //Called when a user renames a page
                 var txtCntnt = document.getElementById("renameName").value
                 if(currentPageUserIsOn > 0 && txtCntnt.length > 0)
                     document.getElementById("Page" + currentPageUserIsOn).textContent = txtCntnt;

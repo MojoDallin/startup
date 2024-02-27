@@ -70,6 +70,7 @@
                     {
                         anotherPage.remove();
                         currentPageUserIsOn += 1
+                        document.getElementById("Page" + currentPageUserIsOn).style.backgroundColor = "#4AC3EC"
                         var textArea = document.getElementById("mainTextArea")
                         textArea.value = pageContent[currentPageUserIsOn]
                     }

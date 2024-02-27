@@ -12,6 +12,7 @@
         <script>
             var index = 1
             var currentPageUserIsOn = 0;
+            const pageContent = ["This text will never been seen. Isn't that cool?"];
             function addPage()
             {
                 //Called when New Page is clicked
@@ -23,6 +24,7 @@
                 anotherPage.addEventListener("dblclick", deletePage);
                 anotherPage.style.backgroundColor = "#EC964A";
                 document.querySelector(".scrollingButtons").append(anotherPage);
+                pageContent.push("Lorem ipsum dolor sit amet; " + index)
                 index++;
                 function goToPage()
                 {
@@ -43,6 +45,8 @@
                         }
                         console.log("Wants to go to " + anotherPage.id + " from Page" + currentPageUserIsOn);
                         currentPageUserIsOn = Number(anotherPage.id.substring(4));
+                        //change text content down here
+                        console.log(pageContent[currentPageUserIsOn])
                     }
                 }
                 var deleteIndex = 0;

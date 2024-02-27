@@ -40,13 +40,15 @@
                                     document.getElementById("Page" + currentPageUserIsOn).style.backgroundColor = "#EC964A"
                             } catch(ex)
                             {
-                                console.log("Failure")
+                                console.log("Failure")  
                             }
                         }
                         console.log("Wants to go to " + anotherPage.id + " from Page" + currentPageUserIsOn);
+                        pageContent[currentPageUserIsOn] = document.getElementById("mainTextArea").value
                         currentPageUserIsOn = Number(anotherPage.id.substring(4));
                         //change text content down here
-                        document.getElementById("mainTextArea").textContent = pageContent[currentPageUserIsOn]
+                        var textArea = document.getElementById("mainTextArea")
+                        textArea.value = pageContent[currentPageUserIsOn]
                     }
                 }
                 var deleteIndex = 0;

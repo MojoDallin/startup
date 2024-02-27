@@ -46,7 +46,7 @@
                         console.log("Wants to go to " + anotherPage.id + " from Page" + currentPageUserIsOn);
                         currentPageUserIsOn = Number(anotherPage.id.substring(4));
                         //change text content down here
-                        console.log(pageContent[currentPageUserIsOn])
+                        document.getElementById("mainTextArea").textContent = pageContent[currentPageUserIsOn]
                     }
                 }
                 var deleteIndex = 0;

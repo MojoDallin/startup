@@ -13,7 +13,15 @@
             //EC964A is orange, 4AC3EC is blue, F34F4F is red
             var index = 1
             var currentPageUserIsOn = 0;
-            const pageContent = ["This text will never been seen. Isn't that cool?"];
+            var pageContent = [];
+            if(localStorage.getItem("pageCntnt") == null)
+                pageContent = ["This text will never been seen. Isn't that cool?"];
+            else
+                pageContent = localStorage.getItem("pageCntnt")
+            for(var i = 0; i < 10;  i++)
+                addPage()
+
+
             function addPage()
             {
                 //Called when New Page is clicked

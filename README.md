@@ -40,7 +40,6 @@ WebSocket Data: Allows users to save and load their notes, as their notes will b
 
 -Added a color combination that looks good
 
-
 -Squashed a few bugs
 
 -Added more functionality such as buttons changing color based on your page
@@ -48,3 +47,11 @@ WebSocket Data: Allows users to save and load their notes, as their notes will b
 -Information.html cleaned up
 
 -Added a logo
+
+
+### Javascript
+-Added saving between sessions (text, page names, usernames) (most functionality was already complete in HTML)
+
+-Squashed some more bugs
+
+-Tweaked minor things

@@ -22,8 +22,9 @@
                 pageIndexes = JSON.parse(localStorage.getItem("pageIndxs"))
             if(localStorage.getItem("pageNms") != null)
                 pageNames = JSON.parse(localStorage.getItem("pageNms"))
-            
+
             var maxNum = pageIndexes.length
+            console.log(pageNames)
             for(var i = 0; i < maxNum; i++)
             {
                 index = pageIndexes[i]
@@ -94,12 +95,14 @@
                     if(deleteIndex > 1)
                     {
                         anotherPage.remove();
+                        pageIndexes.splice(pageIndexes.indexOf(currentPageUserIsOn), 1)
+                        pageNames.splice(currentPageUserIsOn - 1, 1)
                         currentPageUserIsOn += 1
                         document.getElementById("Page" + currentPageUserIsOn).style.backgroundColor = "#4AC3EC"
                         var textArea = document.getElementById("mainTextArea")
                         textArea.value = pageContent[currentPageUserIsOn]
-                        pageIndexes.splice(pageIndexes.indexOf(currentPageUserIsOn - 1), 1)
                         localStorage.setItem("pageIndxs", JSON.stringify(pageIndexes))
+                        localStorage.setItem("pageNms", JSON.stringify(pageNames))
                     }
                 }
             }

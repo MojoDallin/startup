@@ -7,7 +7,7 @@
     </main>
 
     <div class="scrollingButtons">
-        <button onclick="addPage()" class="newPage" id="newPage" style="background-color: #EC964A;">New Page</button>
+        <button onclick="addPage(false)" class="newPage" id="newPage" style="background-color: #EC964A;">New Page</button>
 
         <script>
             //EC964A is orange, 4AC3EC is blue, F34F4F is red
@@ -20,13 +20,16 @@
             if(localStorage.getItem("pageIndxs") != null)
                 pageIndexes = JSON.parse(localStorage.getItem("pageIndxs"))
 
-            for(var i = 0; i < pageIndexes.length; i++)
+            var maxNum = pageIndexes.length
+            for(var i = 0; i < maxNum; i++)
             {
                 index = pageIndexes[i]
+                addPage(true)
+                //localStorage.clear()
             }
 
 
-            function addPage()
+            function addPage(addedFromData)
             {
                 //Called when New Page is clicked
                 var anotherPage = document.createElement("button");
@@ -38,7 +41,8 @@
                 anotherPage.style.backgroundColor = "#EC964A";
                 document.querySelector(".scrollingButtons").append(anotherPage);
                 pageContent.push("This is page " + index + ", this text will be removed later and is currently a placeholder");
-                pageIndexes.push(index);
+                if(!addedFromData)
+                    pageIndexes.push(index);
                 localStorage.setItem("pageIndxs", JSON.stringify(pageIndexes))
                 index++;
                 function goToPage()

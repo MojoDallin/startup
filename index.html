@@ -25,7 +25,7 @@
                 anotherPage.addEventListener("dblclick", deletePage);
                 anotherPage.style.backgroundColor = "#EC964A";
                 document.querySelector(".scrollingButtons").append(anotherPage);
-                pageContent.push("This is page " + index + ", this text will be removed later and is currently a placeholder")
+                pageContent.push("This is page " + index + ", this text will be removed later and is currently a placeholder");
                 index++;
                 function goToPage()
                 {
@@ -95,9 +95,11 @@
         <br>
         <button class="loginButton" onclick="login()">Log In</button>
         <script>
+            document.getElementById("curUser").textContent = "Current User: " + localStorage.getItem('user')
             function login()
             {
                 //Called when a user logs in
+                localStorage.setItem('user', document.getElementById("name").value)
                 console.log("User attempted to log in with user " + document.getElementById("name").value + " and password " + document.getElementById("password").value)
                 document.getElementById("curUser").textContent = "Current User: " + document.getElementById("name").value
             }

@@ -17,7 +17,7 @@
             var pageIndexes = [];
             var pageNames = [];
             if(localStorage.getItem("pageCntnt") != null)
-                pageContent = localStorage.getItem("pageCntnt")
+                pageContent = JSON.parse(localStorage.getItem("pageCntnt"))
             if(localStorage.getItem("pageIndxs") != null)
                 pageIndexes = JSON.parse(localStorage.getItem("pageIndxs"))
             if(localStorage.getItem("pageNms") != null)
@@ -55,6 +55,7 @@
                 function goToPage()
                 {
                     //Called when a user switches pages
+                    localStorage.setItem("pageCntnt", JSON.stringify(pageContent))
                     if(anotherPage.textContent != "Delete?")
                     {
                         anotherPage.style.backgroundColor = "#4AC3EC";

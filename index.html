@@ -13,13 +13,17 @@
             //EC964A is orange, 4AC3EC is blue, F34F4F is red
             var index = 1
             var currentPageUserIsOn = 0;
-            var pageContent = [];
-            if(localStorage.getItem("pageCntnt") == null)
-                pageContent = ["This text will never been seen. Isn't that cool?"];
-            else
+            var pageContent = ["This text will never be seen. Isn't that cool?"];
+            var pageIndexes = [];
+            if(localStorage.getItem("pageCntnt") != null)
                 pageContent = localStorage.getItem("pageCntnt")
-            for(var i = 0; i < 10;  i++)
-                addPage()
+            if(localStorage.getItem("pageIndxs") != null)
+                pageIndexes = JSON.parse(localStorage.getItem("pageIndxs"))
+
+            for(var i = 0; i < pageIndexes.length; i++)
+            {
+                index = pageIndexes[i]
+            }
 
 
             function addPage()
@@ -34,6 +38,8 @@
                 anotherPage.style.backgroundColor = "#EC964A";
                 document.querySelector(".scrollingButtons").append(anotherPage);
                 pageContent.push("This is page " + index + ", this text will be removed later and is currently a placeholder");
+                pageIndexes.push(index);
+                localStorage.setItem("pageIndxs", JSON.stringify(pageIndexes))
                 index++;
                 function goToPage()
                 {
@@ -82,6 +88,8 @@
                         document.getElementById("Page" + currentPageUserIsOn).style.backgroundColor = "#4AC3EC"
                         var textArea = document.getElementById("mainTextArea")
                         textArea.value = pageContent[currentPageUserIsOn]
+                        pageIndexes.splice(pageIndexes.indexOf(currentPageUserIsOn - 1), 1)
+                        localStorage.setItem("pageIndxs", JSON.stringify(pageIndexes))
                     }
                 }
             }
@@ -103,7 +111,8 @@
         <br>
         <button class="loginButton" onclick="login()">Log In</button>
         <script>
-            document.getElementById("curUser").textContent = "Current User: " + localStorage.getItem('user')
+            if(localStorage.getItem('user') != null)
+                document.getElementById("curUser").textContent = "Current User: " + localStorage.getItem('user')
             function login()
             {
                 //Called when a user logs in

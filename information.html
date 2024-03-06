@@ -10,7 +10,22 @@
         <p>Pages will autosave every minute and autoload when the website is loaded</p>
         <a href="index.html"><button style="background-color: #EC964A;">Back to Notes</button></a>
     </main>
-    <br> <br> <br>
+    <br>
+    <div>
+        <p id="quote" style="font-style: italic;"></p>
+        <p id="author"></p>
+        <script>
+            fetch('https://api.quotable.io/random')
+            .then((response) => response.json())
+            .then((data) => {
+                document.getElementById("quote").textContent = "\"" + data.content + "\"";
+                document.getElementById("author").textContent = "from " + data.author;
+            }
+            )
+        </script>
+    </div>
+    <br>
+    <br>
     <footer>
         <p style="font-style: italic;">Created by Dallin Schmidt for CS260</p>
         <a href="https://github.com/MojoDallin/startup">Github</p>

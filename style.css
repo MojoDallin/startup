@@ -44,6 +44,14 @@ body {
             background-color: #EC964A;
         }
     }
+    .clearData {
+        right: 20px;
+        bottom: 100px;
+        position: absolute;
+        .clearDataButton {
+            background-color: #EC964A;
+        }
+    }
     .rename {
         right: 20px;
         bottom: 20px;

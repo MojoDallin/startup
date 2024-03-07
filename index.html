@@ -145,11 +145,29 @@
     </div>
 
     <div class="clearData">
-        <button onclick="clearData()" class="clearDataButton">Clear Data</button>
+        <button onclick="clearData()" class="clearDataButton" id="clearDataButton">Clear Data</button>
         <script>
+            var clearIndex = 0;
             function clearData()
             {
                 console.log("User attempted to clear data")
+                var button = document.getElementById("clearDataButton")
+                button.textContent = "Are you sure?"
+                button.style.backgroundColor = "#F34F4F"
+                clearIndex++;
+                setTimeout(() =>
+                {
+                    button.textContent = "Clear Data"
+                    clearIndex = 0;
+                    button.style.backgroundColor = "#EC964A"
+                }, 3000)
+
+                if(clearIndex > 1)
+                {
+                    button.textContent = "Data cleared."
+                    localStorage.clear();
+                    location.reload();
+                }
             }
         </script>
     </div>

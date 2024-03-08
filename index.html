@@ -20,6 +20,7 @@
             var pageContent = ["This text will never be seen. Isn't that cool?"];
             var pageIndexes = [];
             var pageNames = [];
+            var pagesMade = 0;
             if(localStorage.getItem("pageCntnt") != null)
                 pageContent = JSON.parse(localStorage.getItem("pageCntnt"))
             if(localStorage.getItem("pageIndxs") != null)
@@ -53,6 +54,11 @@
                 {
                     pageIndexes.push(index);
                     pageNames.push(title)
+                    fetch('/total-created-pages')
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data.counter);
+                })
                 }
                 localStorage.setItem("pageIndxs", JSON.stringify(pageIndexes))
                 localStorage.setItem("pageNms", JSON.stringify(pageNames))
@@ -113,7 +119,6 @@
                         localStorage.setItem("totalRemoved", totalRemovedPages)
                     }
                 }
-
             }
         </script>
     </div>

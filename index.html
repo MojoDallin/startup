@@ -37,8 +37,6 @@
                 addPage(true, pageNames[i])
                 //localStorage.clear()
             }
-
-
             function addPage(addedFromData, title = "Page " + index)
             {
                 //Called when New Page is clicked
@@ -53,12 +51,13 @@
                 if(!addedFromData)
                 {
                     pageIndexes.push(index);
-                    pageNames.push(title)
+                    pageNames.push(title);
                     fetch('/total-created-pages')
                     .then(response => response.json())
                     .then(data => {
                         localStorage.setItem('totalPagesMade', data.counter);
-                })
+                    })
+
                 }
                 localStorage.setItem("pageIndxs", JSON.stringify(pageIndexes))
                 localStorage.setItem("pageNms", JSON.stringify(pageNames))

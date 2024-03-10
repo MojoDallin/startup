@@ -15,3 +15,7 @@ app.get('/total-created-pages', (req, res) => {
 app.listen(port, () => {
   console.log(`Web service listening at port ${port}`);
 });
+
+app.use((req, res) => {
+  res.sendFile('index.html', {root: 'public'})
+})

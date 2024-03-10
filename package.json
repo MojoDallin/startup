@@ -1,7 +1,7 @@
 {
   "name": "nodejs",
   "version": "1.0.0",
-  "description": "",
+  "description": "Have you ever been typing notes on your computer to save them for an important presentation tomorrow, and right as you get to the office, you realize you forgot to print them, and you can't access them at the office? This is the perfect website for that accident; as long as you have an account and your notes are stored under your account, you can access them from any web browser once you log in. It's simple and easy to use with an intuitive user-interface that allows for multiple pages with stress-free organization. It's a very easy website to learn and you will get accustomed to the simplistic yet useful functions of it within a matter of minutes.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -41,7 +41,6 @@ bash -i
 cd services/${service}
 npm install
 pm2 restart ${service}
-printf "\n----> TESTING\n"
 ENDSSH
 
 # Step 5

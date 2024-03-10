@@ -57,7 +57,7 @@
                     fetch('/total-created-pages')
                     .then(response => response.json())
                     .then(data => {
-                        sessionStorage.setItem('totalPagesMade', data);
+                        localStorage.setItem('totalPagesMade', data.counter);
                 })
                 }
                 localStorage.setItem("pageIndxs", JSON.stringify(pageIndexes))

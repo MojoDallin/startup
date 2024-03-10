@@ -17,5 +17,5 @@ app.listen(port, () => {
 });
 
 app.use((req, res) => {
-  res.sendFile('index.html', {root: 'public'})
+  res.sendFile('index.html', {root: './'})
 })

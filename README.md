@@ -55,3 +55,13 @@ WebSocket Data: Allows users to save and load their notes, as their notes will b
 -Squashed some more bugs
 
 -Tweaked minor things
+
+
+### Service
+-Added a total page counter which tracks the total amount of pages ever created, NOT the total amount of pages at a given time (deleted pages aren't subtracted)
+
+-Also added a quote whenever information.html is loaded
+
+-Minor tweaks
+
+-index.js

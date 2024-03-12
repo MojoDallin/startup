@@ -15,8 +15,11 @@
         </p>
         <a href="index.html"><button style="background-color: #EC964A;">Back to Notes</button></a>
         <script>
-            if(localStorage.getItem('totalPagesMade'))
-                document.getElementById("pageCounter").textContent = localStorage.getItem('totalPagesMade')
+            fetch('/total-created-pages-no-increment')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("pageCounter").textContent = data.counter;
+            })
         </script>
     </main>
     <br>

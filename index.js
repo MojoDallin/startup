@@ -11,6 +11,10 @@ app.get('/total-created-pages', (req, res) => {
   res.json({counter});
 });
 
+app.get('/total-created-pages-no-increment', (req, res) => {
+  res.json({counter});
+})
+
 
 app.listen(port, () => {
   console.log(`Web service listening at port ${port}`);

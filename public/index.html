@@ -55,7 +55,7 @@
                     fetch('/total-created-pages')
                     .then(response => response.json())
                     .then(data => {
-                        localStorage.setItem('totalPagesMade', data.counter);
+                        localStorage.setItem('totalPagesMade', data.counter); //unused but it increments counter soo
                     })
 
                 }

@@ -39,7 +39,12 @@ body {
         top: 20px;
         position: absolute;
         .loginButton {
-            right: 75px;
+            right: 100px;
+            position: absolute;
+            background-color: #EC964A;
+        }
+        .logoutButton {
+            right: 20px;
             position: absolute;
             background-color: #EC964A;
         }

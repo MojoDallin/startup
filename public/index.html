@@ -136,6 +136,7 @@
         <label id="curUser">Current User: </label>
         <br>
         <button class="loginButton" onclick="login()">Log In</button>
+        <button class="logoutButton" onclick="logout()">Log Out</button>
         <script>
             if(localStorage.getItem('user') != null)
                 document.getElementById("curUser").textContent = "Current User: " + localStorage.getItem('user')

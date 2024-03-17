@@ -147,6 +147,12 @@
                 console.log("User attempted to log in with user " + document.getElementById("name").value + " and password " + document.getElementById("password").value)
                 document.getElementById("curUser").textContent = "Current User: " + document.getElementById("name").value
             }
+            function logout()
+            {
+                localStorage.removeItem('user')
+                console.log("User logged out")
+                document.getElementById("curUser").textContent = "Current User: "
+            }
         </script>
     </div>
 

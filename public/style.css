@@ -48,6 +48,11 @@ body {
             position: absolute;
             background-color: #EC964A;
         }
+        .signupButton {
+            right: 60px;
+            position: absolute;
+            background-color: #EC964A;
+        }
     }
     .clearData {
         right: 20px;

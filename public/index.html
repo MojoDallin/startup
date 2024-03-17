@@ -137,6 +137,8 @@
         <br>
         <button class="loginButton" onclick="login()">Log In</button>
         <button class="logoutButton" onclick="logout()">Log Out</button>
+        <br>
+        <button class="signupButton" onclick="signup()">Sign Up</button>
         <script>
             if(localStorage.getItem('user') != null)
                 document.getElementById("curUser").textContent = "Current User: " + localStorage.getItem('user')
@@ -152,6 +154,10 @@
                 localStorage.removeItem('user')
                 console.log("User logged out")
                 document.getElementById("curUser").textContent = "Current User: "
+            }
+            function signup()
+            {
+                
             }
         </script>
     </div>

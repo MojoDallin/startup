@@ -139,6 +139,8 @@
         <button class="logoutButton" onclick="logout()">Log Out</button>
         <br>
         <button class="signupButton" onclick="signup()">Sign Up</button>
+        <br>
+        <label id="extra">Test</label>
         <script>
             if(localStorage.getItem('user') != null)
                 document.getElementById("curUser").textContent = "Current User: " + localStorage.getItem('user')
@@ -148,6 +150,7 @@
                 localStorage.setItem('user', document.getElementById("name").value)
                 console.log("User attempted to log in with user " + document.getElementById("name").value + " and password " + document.getElementById("password").value)
                 document.getElementById("curUser").textContent = "Current User: " + document.getElementById("name").value
+                
             }
             function logout()
             {

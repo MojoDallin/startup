@@ -141,15 +141,24 @@
         <button class="signupButton" onclick="signup()">Sign Up</button>
         <br>
         <label id="extra">Test</label>
+        <script id="scriptLoader" type="application/javascript"></script>
         <script>
             if(localStorage.getItem('user') != null)
                 document.getElementById("curUser").textContent = "Current User: " + localStorage.getItem('user')
             function login()
             {
                 //Called when a user logs in
-                localStorage.setItem('user', document.getElementById("name").value)
-                console.log("User attempted to log in with user " + document.getElementById("name").value + " and password " + document.getElementById("password").value)
-                document.getElementById("curUser").textContent = "Current User: " + document.getElementById("name").value
+                // let user = document.getElementById("name").value
+                // let pass = document.getElementById("password").value
+                // localStorage.setItem('user', document.getElementById("name").value)
+                // console.log(user, pass)
+                // document.getElementById("curUser").textContent = "Current User: " + document.getElementById("name").value
+                fetch('/login', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({username: document.getElementById("name").value, password: document.getElementById("password").value})
+                })
+                
                 
             }
             function logout()

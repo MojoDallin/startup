@@ -41,23 +41,15 @@ async function login(user, pass)
   try
   {
     await client.connect()
-    const result = await client.db(dbName).collection(colName).find({"username": user}).toArray();
-    var isUserFound = false
-    result.forEach((item) => {
-      if(item["username"] == user)
-      {
-        isUserFound = true
-        if(item["password"] == pass)
-        {
-          return
-        }
-        else
-          console.log("Incorrect!")
-      }
-    })
-    if(!isUserFound)
-    {
+    const result = await collection.findOne({"username": user});
+    if(!result)
       console.log("User not found!")
+    else
+    {
+      if(result["password"] == pass)
+        console.log("Correct!")
+      else
+        console.log("Incorrect!")
     }
   }
   finally

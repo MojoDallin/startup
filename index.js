@@ -32,13 +32,11 @@ app.get('/total-created-pages-no-increment', (req, res) => {
 })
 
 app.post('/login', (req, res) => {
-  let user = req.body.username
-  let pass = req.body.password
-  tryToConnect(user, pass)
+  login(req.body.username, req.body.password)
 })
 
 
-async function tryToConnect(user, pass)
+async function login(user, pass)
 {
   try
   {

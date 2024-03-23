@@ -135,50 +135,46 @@
         <br>
         <label id="curUser">Current User: </label>
         <br>
-        <button class="loginButton" onclick="login()">Log In</button>
+        <button class="loginButton" onclick="handleUsers('/login')">Log In</button>
         <button class="logoutButton" onclick="logout()">Log Out</button>
         <br>
-        <button class="signupButton" onclick="signup()">Sign Up</button>
+        <button class="signupButton" onclick="handleUsers('/register')">Sign Up</button>
         <br>
         <label id="extra"></label>
         <script id="scriptLoader" type="application/javascript"></script>
         <script>
             if(localStorage.getItem('user') != null)
                 document.getElementById("curUser").textContent = "Current User: " + localStorage.getItem('user')
-            function login()
+            function handleUsers(type)
             {
                 //Called when a user logs in
                 let user = document.getElementById("name").value
                 let pass = document.getElementById("password").value
-                // localStorage.setItem('user', document.getElementById("name").value)
-                // console.log(user, pass)
+                let bdy = JSON.stringify({username: user, password: pass, pages: localStorage.getItem("pageIndxs"), pageNames: localStorage.getItem("pageNms"), noteData: localStorage.getItem("pageCntnt"), removed: localStorage.getItem("totalRemoved")})
                 document.getElementById("extra").textContent = "Thinking..."
-                fetch('/login', {
+                fetch(type, {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({username: user, password: pass})
+                    body: bdy
                 })
                 .then(response => response.json())
                 .then(data => {
                     document.getElementById("extra").textContent = data.output
                     if(document.getElementById("extra").textContent === "Successfully logged in.")
+                    {
                         document.getElementById("curUser").textContent = "Current User: " + user
+                        localStorage.setItem('user', user)
+                    }
                     setTimeout(() => {
                         document.getElementById ("extra").textContent = ""
                     }, 1500)
                 })
-                
-                
             }
             function logout()
             {
                 localStorage.removeItem('user')
                 console.log("User logged out")
                 document.getElementById("curUser").textContent = "Current User: "
-            }
-            function signup()
-            {
-                
             }
         </script>
     </div>

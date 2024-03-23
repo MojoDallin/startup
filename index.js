@@ -38,6 +38,13 @@ app.post('/login', (req, res) => {
   })
 })
 
+app.post('/register', (req, res) => {
+  let result = register(req.body.username, req.body.password, req.body.pages, req.body.pageNames, req.body.noteData, req.body.removed)
+  result.then(function(output) {
+    res.send({output})
+  })
+})
+
 
 async function login(user, pass)
 {
@@ -49,7 +56,7 @@ async function login(user, pass)
       return "User not found! Register?"
     else
     {
-      if(result["password"] == pass)
+      if(await bcrypt.compare(pass, result["password"]))
         return `Successfully logged in.`
       else
         return "Incorrect password!"
@@ -61,52 +68,28 @@ async function login(user, pass)
   }
 }
 
-
-
-
-
-
-
-
-app.post('/register', async (req, res) => {
-  if(await getUser(req.body.email))
+async function register(username, password, pgs, nms, data, rmvd)
+{
+  try
   {
-    res.status(409).send({msg: "User already exists"})
-  }
-  else
-  {
-    const user = await createUser(req.body.email, req.body.password)
-    setAuthCookie(res, user.token)
-    res.send({ 
-      id: user._id
-    })
-  }
-})
-
-app.post('/login', async (req, res) => {
-  const user = await getUser(req.body.email)
-  if(user)
-  {
-    if(await bcrypt.compare(req.body.password, user.password))
-    {
-      setAuthCookie(res, user.token)
-      res.send({id: user._id})
-      return
+    await client.connect()
+    const hashed = await bcrypt.hash(password, 10)
+    const user = {
+      username: username,
+      password: hashed,
+      pages: pgs,
+      pageNames: nms,
+      noteData: data,
+      removed: rmvd
     }
+    await collection.insertOne(user)
+    return "Successfully logged in."
   }
-  res.status(401).send({msg: "Unauthorized"})
-})
-
-app.get('/user', async (req, res) => {
-  token = req.cookies['token']
-  const user = await collection.findOne({token: token})
-  if(user)
+  finally
   {
-    res.send({email: user.email})
-    return
+    await client.close()
   }
-  res.status(401).send({msg: "Unauthorized"})
-})
+}
 
 app.listen(port, () => {
   console.log(`Web service listening at port ${port}`);
@@ -115,27 +98,6 @@ app.listen(port, () => {
 app.use((req, res) => {
   res.sendFile('index.html', {root: './'})
 })
-
-
-
-function getUser(email)
-{
-    return collection.findOne({email: email})
-}
-async function createUser(username, password)
-{
-    const hashed = await bcrypt.hash(password, 10)
-    const user = {
-        username: username,
-        password: hashed,
-        pages: localStorage.getItem('pageIndxs'),
-        pageNames: localStorage.getItem('pageNms'),
-        noteData: localStorage.getItem('pageCntnt'),
-        removed: localStorage.getItem('totalRemoved')
-    }
-    await collection.insertOne(user)
-    return user
-}
 
 
 function setAuthCookie(res, token)

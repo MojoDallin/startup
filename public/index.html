@@ -163,6 +163,14 @@
             function handleUsers(type)
             {
                 //Called when a user logs in
+                if(!document.getElementById("name").value || !document.getElementById("password").value)
+                {
+                    document.getElementById("extra").textContent = "Credentials missing!"
+                    setTimeout(() => {
+                        document.getElementById("extra").textContent = ""
+                    }, 1500)
+                    return
+                }
                 let user = document.getElementById("name").value
                 let pass = document.getElementById("password").value
                 let bdy = JSON.stringify({username: user, password: pass, pages: localStorage.getItem("pageIndxs"), pageNames: localStorage.getItem("pageNms"), noteData: localStorage.getItem("pageCntnt"), removed: localStorage.getItem("totalRemoved")})
@@ -200,9 +208,10 @@
             }
             function logout()
             {
-                localStorage.removeItem('user')
+                localStorage.clear()
+                location.reload()
                 console.log("User logged out")
-                document.getElementById("curUser").textContent = "Current User: "
+                //document.getElementById("curUser").textContent = "Current User: "
             }
         </script>
     </div>

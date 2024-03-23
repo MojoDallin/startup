@@ -14,7 +14,6 @@ const colName = 'notes'
 const uuid = require('uuid')
 const bcrypt = require('bcrypt')
 const collection = client.db('notepad').collection('notes')
-const database = require("./public/database.js")
 
 app.use(cookie());
 app.use(express.static('public'));

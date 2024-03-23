@@ -29,7 +29,7 @@
             if(localStorage.getItem("pageNms") != null)
                 pageNames = JSON.parse(localStorage.getItem("pageNms"))
             if(localStorage.getItem("totalRemoved") != null)
-                totalRemovedPages = localStorage.getItem("totalRemoved")
+                totalRemovedPages = Number(localStorage.getItem("totalRemoved"))
             if(localStorage.getItem("userLoggedIn"))
                 currentUser = localStorage.getItem("userLoggedIn")
             
@@ -92,10 +92,11 @@
                     }
                     if(currentUser)
                     {
+                        console.log(totalRemovedPages)
                         fetch('/update', {
                             method: 'POST',
                             headers: {'Content-Type': 'application/json'},
-                            body: JSON.stringify({username: currentUser, pgs: localStorage.getItem("pageIndxs"), nms: localStorage.getItem("pageNms"), data: localStorage.getItem("pageCntnt"), rmvd: localStorage.getItem("totalRemoved")})
+                            body: JSON.stringify({username: currentUser, pgs: pageIndexes, nms: pageNames, data: pageContent, rmvd: totalRemovedPages})
                         })
                         .then(response => response.json())
                         .then(data => {
@@ -173,7 +174,7 @@
                 }
                 let user = document.getElementById("name").value
                 let pass = document.getElementById("password").value
-                let bdy = JSON.stringify({username: user, password: pass, pages: localStorage.getItem("pageIndxs"), pageNames: localStorage.getItem("pageNms"), noteData: localStorage.getItem("pageCntnt"), removed: localStorage.getItem("totalRemoved")})
+                let bdy = JSON.stringify({username: user, password: pass, pages: pageIndexes, pageNames: pageNames, noteData: pageContent, removed: totalRemovedPages})
                 document.getElementById("extra").textContent = "Thinking..."
                 fetch(type, {
                     method: 'POST',

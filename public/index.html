@@ -21,6 +21,7 @@
             var pageIndexes = [];
             var pageNames = [];
             var pagesMade = 0;
+            var currentUser = null
             if(localStorage.getItem("pageCntnt") != null)
                 pageContent = JSON.parse(localStorage.getItem("pageCntnt"))
             if(localStorage.getItem("pageIndxs") != null)
@@ -29,6 +30,8 @@
                 pageNames = JSON.parse(localStorage.getItem("pageNms"))
             if(localStorage.getItem("totalRemoved") != null)
                 totalRemovedPages = localStorage.getItem("totalRemoved")
+            if(localStorage.getItem("userLoggedIn"))
+                currentUser = localStorage.getItem("userLoggedIn")
             
             var maxNum = pageIndexes.length
             for(var i = 0; i < pageIndexes.length; i++)
@@ -86,6 +89,18 @@
                         //change text content down here
                         var textArea = document.getElementById("mainTextArea")
                         textArea.value = pageContent[currentPageUserIsOn]
+                    }
+                    if(currentUser)
+                    {
+                        fetch('/update', {
+                            method: 'POST',
+                            headers: {'Content-Type': 'application/json'},
+                            body: JSON.stringify({username: currentUser, pgs: localStorage.getItem("pageIndxs"), nms: localStorage.getItem("pageNms"), data: localStorage.getItem("pageCntnt"), rmvd: localStorage.getItem("totalRemoved")})
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+
+                        })
                     }
                 }
                 var deleteIndex = 0;
@@ -161,7 +176,16 @@
                 .then(data => {
                     console.log(data)
                     if(data.output.message)
+                    {
                         document.getElementById("extra").textContent = data.output.message
+                        localStorage.setItem("pageCntnt", data.output.noteData)
+                        localStorage.setItem("pageIndxs", data.output.pages)
+                        localStorage.setItem("pageNms", data.output.pageNames)
+                        localStorage.setItem("totalRemoved", data.output.removed)
+                        currentUser = data.output.username
+                        localStorage.setItem("userLoggedIn", data.output.username)
+                        location.reload()
+                    }
                     else
                         document.getElementById("extra").textContent = data.output
                     if(document.getElementById("extra").textContent === "Successfully logged in.")

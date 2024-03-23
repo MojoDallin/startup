@@ -45,6 +45,10 @@ app.post('/register', (req, res) => {
   })
 })
 
+app.post('/update', (req, res) => {
+  collection.updateOne({username: req.body.username}, {$set:{pages: req.body.pgs, pageNames: req.body.nms, noteData: req.body.data, removed: req.body.rmvd}})
+})
+
 
 async function login(user, pass)
 {

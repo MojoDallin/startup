@@ -159,7 +159,11 @@
                 })
                 .then(response => response.json())
                 .then(data => {
-                    document.getElementById("extra").textContent = data.output
+                    console.log(data)
+                    if(data.output.message)
+                        document.getElementById("extra").textContent = data.output.message
+                    else
+                        document.getElementById("extra").textContent = data.output
                     if(document.getElementById("extra").textContent === "Successfully logged in.")
                     {
                         document.getElementById("curUser").textContent = "Current User: " + user

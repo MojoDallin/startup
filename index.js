@@ -33,8 +33,8 @@ app.get('/total-created-pages-no-increment', (req, res) => {
 
 app.post('/login', (req, res) => {
   let result = login(req.body.username, req.body.password)
-  result.then(function(output) {
-    res.send({output})
+  result.then(function(output, message) {
+    res.send({output, message})
   })
 })
 
@@ -57,7 +57,7 @@ async function login(user, pass)
     else
     {
       if(await bcrypt.compare(pass, result["password"]))
-        return `Successfully logged in.`
+        return result
       else
         return "Incorrect password!"
     }
@@ -80,7 +80,8 @@ async function register(username, password, pgs, nms, data, rmvd)
       pages: pgs,
       pageNames: nms,
       noteData: data,
-      removed: rmvd
+      removed: rmvd,
+      message: "Successfully logged in."
     }
     await collection.insertOne(user)
     return "Successfully logged in."

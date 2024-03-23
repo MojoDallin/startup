@@ -32,7 +32,10 @@ app.get('/total-created-pages-no-increment', (req, res) => {
 })
 
 app.post('/login', (req, res) => {
-  login(req.body.username, req.body.password)
+  let result = login(req.body.username, req.body.password)
+  result.then(function(output) {
+    res.send({output})
+  })
 })
 
 
@@ -43,13 +46,13 @@ async function login(user, pass)
     await client.connect()
     const result = await collection.findOne({"username": user});
     if(!result)
-      console.log("User not found!")
+      return "User not found! Register?"
     else
     {
       if(result["password"] == pass)
-        console.log("Correct!")
+        return `Successfully logged in.`
       else
-        console.log("Incorrect!")
+        return "Incorrect password!"
     }
   }
   finally
@@ -119,13 +122,16 @@ function getUser(email)
 {
     return collection.findOne({email: email})
 }
-async function createUser(email, password)
+async function createUser(username, password)
 {
     const hashed = await bcrypt.hash(password, 10)
     const user = {
-        email: email,
+        username: username,
         password: hashed,
-        token: uuid.v4()
+        pages: localStorage.getItem('pageIndxs'),
+        pageNames: localStorage.getItem('pageNms'),
+        noteData: localStorage.getItem('pageCntnt'),
+        removed: localStorage.getItem('totalRemoved')
     }
     await collection.insertOne(user)
     return user

@@ -140,7 +140,7 @@
         <br>
         <button class="signupButton" onclick="signup()">Sign Up</button>
         <br>
-        <label id="extra">Test</label>
+        <label id="extra"></label>
         <script id="scriptLoader" type="application/javascript"></script>
         <script>
             if(localStorage.getItem('user') != null)
@@ -148,15 +148,24 @@
             function login()
             {
                 //Called when a user logs in
-                // let user = document.getElementById("name").value
-                // let pass = document.getElementById("password").value
+                let user = document.getElementById("name").value
+                let pass = document.getElementById("password").value
                 // localStorage.setItem('user', document.getElementById("name").value)
                 // console.log(user, pass)
-                // document.getElementById("curUser").textContent = "Current User: " + document.getElementById("name").value
+                document.getElementById("extra").textContent = "Thinking..."
                 fetch('/login', {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({username: document.getElementById("name").value, password: document.getElementById("password").value})
+                    body: JSON.stringify({username: user, password: pass})
+                })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("extra").textContent = data.output
+                    if(document.getElementById("extra").textContent === "Successfully logged in.")
+                        document.getElementById("curUser").textContent = "Current User: " + user
+                    setTimeout(() => {
+                        document.getElementById ("extra").textContent = ""
+                    }, 1500)
                 })
                 
                 

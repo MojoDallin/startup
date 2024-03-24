@@ -21,7 +21,7 @@ Database Data: Every account and all their notes will be stored in this database
 WebSocket Data: Allows users to save and load their notes, as their notes will be sent from the client to the server periodically (autosaving) and sent from the server to the client when opening the page (autoloading)
 
 ### Mockup Image
-![Mockup image of the website](https://github.com/MojoDallin/startup/blob/main/mockup.png)
+![Mockup image of the website](https://github.com/MojoDallin/startup/blob/main/public/mockup.png)
 
 
 # Recent

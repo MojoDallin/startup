@@ -65,3 +65,14 @@ WebSocket Data: Allows users to save and load their notes, as their notes will b
 -Minor tweaks
 
 -index.js
+
+### Login
+-Login functionality
+
+-Clear Data button repurposed to a clear all user data button, only accessible to admin
+
+-Sign Up and Log Out buttons
+
+-Quality of life fixes and changes
+
+-Autosaves every 5 seconds, loads on page load and login

@@ -32,8 +32,8 @@ app.get('/total-created-pages-no-increment', (req, res) => {
 
 app.post('/login', (req, res) => {
   let result = login(req.body.username, req.body.password)
-  result.then(function(output, message) {
-    res.send({output, message})
+  result.then(function(output) {
+    res.send({output})
   })
 })
 
@@ -45,9 +45,22 @@ app.post('/register', (req, res) => {
 })
 
 app.post('/update', (req, res) => {
-  collection.updateOne({username: req.body.username}, {$set:{pages: req.body.pgs, pageNames: req.body.nms, noteData: req.body.data, removed: req.body.rmvd}})
+  let result = update(req.body.username, req.body.pgs, req.body.nms, req.body.data, req.body.rmvd)
+  result.then(function(output){res.send({output})})
 })
 
+async function update(user, pages, names, data, removed)
+{
+  try
+  {
+    await client.connect()
+    await collection.updateOne({username: user}, {$set:{"pages": pages, "pageNames": names, "noteData": data, "removed": removed}})
+  }
+  finally
+  {
+    await client.close()
+  }
+}
 
 async function login(user, pass)
 {

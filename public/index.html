@@ -22,6 +22,8 @@
             var pageNames = [];
             var pagesMade = 0;
             var currentUser = null
+            if(localStorage.getItem("userLoggedIn"))
+                currentUser = localStorage.getItem("userLoggedIn")
             if(localStorage.getItem("pageCntnt") != null)
                 pageContent = JSON.parse(localStorage.getItem("pageCntnt"))
             if(localStorage.getItem("pageIndxs") != null)
@@ -30,8 +32,7 @@
                 pageNames = JSON.parse(localStorage.getItem("pageNms"))
             if(localStorage.getItem("totalRemoved") != null)
                 totalRemovedPages = Number(localStorage.getItem("totalRemoved"))
-            if(localStorage.getItem("userLoggedIn"))
-                currentUser = localStorage.getItem("userLoggedIn")
+            
             
             var maxNum = pageIndexes.length
             for(var i = 0; i < pageIndexes.length; i++)
@@ -92,7 +93,6 @@
                     }
                     if(currentUser)
                     {
-                        console.log(totalRemovedPages)
                         fetch('/update', {
                             method: 'POST',
                             headers: {'Content-Type': 'application/json'},
@@ -157,6 +157,9 @@
         <button class="signupButton" onclick="handleUsers('/register')">Sign Up</button>
         <br>
         <label id="extra"></label>
+        <br>
+        <br>
+        <button class="saveButton" onclick="save()">Save Notes</button>
         <script id="scriptLoader" type="application/javascript"></script>
         <script>
             if(localStorage.getItem('user') != null)
@@ -183,13 +186,13 @@
                 })
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data)
                     if(data.output.message)
                     {
+                        console.log(data.output)
                         document.getElementById("extra").textContent = data.output.message
-                        localStorage.setItem("pageCntnt", data.output.noteData)
-                        localStorage.setItem("pageIndxs", data.output.pages)
-                        localStorage.setItem("pageNms", data.output.pageNames)
+                        localStorage.setItem("pageCntnt", JSON.stringify(data.output.noteData))
+                        localStorage.setItem("pageIndxs", JSON.stringify(data.output.pages))
+                        localStorage.setItem("pageNms", JSON.stringify(data.output.pageNames))
                         localStorage.setItem("totalRemoved", data.output.removed)
                         currentUser = data.output.username
                         localStorage.setItem("userLoggedIn", data.output.username)
@@ -213,6 +216,18 @@
                 location.reload()
                 console.log("User logged out")
                 //document.getElementById("curUser").textContent = "Current User: "
+            }
+            function save()
+            {
+                fetch('/update', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({username: currentUser, pgs: pageIndexes, nms: pageNames, data: pageContent, rmvd: totalRemovedPages})
+                })
+                .then(response => response.json())
+                .then(data => {
+
+                })
             }
         </script>
     </div>

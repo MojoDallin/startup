@@ -84,7 +84,6 @@
                                 console.log("Failure")  
                             }
                         }
-                        console.log("Wants to go to " + anotherPage.id + " from Page" + currentPageUserIsOn);
                         pageContent[currentPageUserIsOn] = document.getElementById("mainTextArea").value
                         currentPageUserIsOn = Number(anotherPage.id.substring(4));
                         //change text content down here
@@ -97,7 +96,6 @@
                 {
                     //Called when a user wants to delete a page
                     var oldName = anotherPage.textContent
-                    console.log("Wants to delete " + anotherPage.textContent);
                     anotherPage.textContent = "Delete?";
                     anotherPage.style.backgroundColor = "#F34F4F";  
                     deleteIndex++;
@@ -148,7 +146,8 @@
         <br>
         <script id="scriptLoader" type="application/javascript"></script>
         <script>
-            save()
+            if(currentUser)
+                save()
             if(localStorage.getItem('user') != null)
                 document.getElementById("curUser").textContent = "Current User: " + localStorage.getItem('user')
             function handleUsers(type)
@@ -175,7 +174,6 @@
                 .then(data => {
                     if(data.output.message)
                     {
-                        console.log(data.output)
                         document.getElementById("extra").textContent = data.output.message
                         localStorage.setItem("pageCntnt", JSON.stringify(data.output.noteData))
                         localStorage.setItem("pageIndxs", JSON.stringify(data.output.pages))
@@ -201,8 +199,6 @@
             {
                 localStorage.clear()
                 location.reload()
-                console.log("User logged out")
-                //document.getElementById("curUser").textContent = "Current User: "
             }
             function save()
             {
@@ -219,28 +215,45 @@
     </div>
 
     <div class="clearData">
-        <button onclick="clearData()" class="clearDataButton" id="clearDataButton">Clear Data</button>
+        <button onclick="clearData()" class="clearDataButton" id="clearDataButton">Clear ALL Data</button>
         <script>
+            document.getElementById("clearDataButton").style.display="none"
+            if(currentUser === "MojoDallin")
+                document.getElementById("clearDataButton").style.display="block"
             var clearIndex = 0;
+            async function reset()
+            {
+                document.getElementById("clearDataButton").textContent = "Clearing ALL Data..."
+                fetch('/reset', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({})
+                })
+                .then(response => response.json())
+                .then(data => {document.getElementById("clearDataButton").textContent = "ALL data cleared. Reloading..."})
+            }
+
             function clearData()
             {
-                console.log("User attempted to clear data")
                 var button = document.getElementById("clearDataButton")
-                button.textContent = "Are you sure?"
+                button.textContent = "Are you REALLY sure?"
                 button.style.backgroundColor = "#F34F4F"
                 clearIndex++;
                 setTimeout(() =>
                 {
-                    button.textContent = "Clear Data"
+                    button.textContent = "Clear ALL Data"
                     clearIndex = 0;
                     button.style.backgroundColor = "#EC964A"
                 }, 3000)
 
                 if(clearIndex > 1)
                 {
-                    button.textContent = "Data cleared."
-                    localStorage.clear();
-                    location.reload();
+                    let result = reset()
+                    result.then(function(){
+                    setTimeout(() => {
+                        //localStorage.clear()
+                        location.reload()
+                    }, 1500) })
                 }
             }
         </script>

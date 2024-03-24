@@ -49,6 +49,24 @@ app.post('/update', (req, res) => {
   result.then(function(output){res.send({output})})
 })
 
+app.post('/reset', (req, res) => {
+  let result = reset()
+  result.then(function(output){res.send({output})})
+})
+
+async function reset()
+{
+  try
+  {
+    await client.connect()
+    await collection.deleteMany({});
+  }
+  finally
+  {
+    await client.close()
+  }
+}
+
 async function update(user, pages, names, data, removed)
 {
   try

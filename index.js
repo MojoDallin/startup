@@ -118,7 +118,7 @@ async function register(username, password, pgs, nms, data, rmvd)
       message: "Successfully logged in."
     }
     await collection.insertOne(user)
-    return "Successfully logged in."
+    return "Created! Try logging in."
   }
   finally
   {

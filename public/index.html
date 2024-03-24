@@ -91,18 +91,6 @@
                         var textArea = document.getElementById("mainTextArea")
                         textArea.value = pageContent[currentPageUserIsOn]
                     }
-                    if(currentUser)
-                    {
-                        fetch('/update', {
-                            method: 'POST',
-                            headers: {'Content-Type': 'application/json'},
-                            body: JSON.stringify({username: currentUser, pgs: pageIndexes, nms: pageNames, data: pageContent, rmvd: totalRemovedPages})
-                        })
-                        .then(response => response.json())
-                        .then(data => {
-
-                        })
-                    }
                 }
                 var deleteIndex = 0;
                 function deletePage()
@@ -158,10 +146,9 @@
         <br>
         <label id="extra"></label>
         <br>
-        <br>
-        <button class="saveButton" onclick="save()">Save Notes</button>
         <script id="scriptLoader" type="application/javascript"></script>
         <script>
+            save()
             if(localStorage.getItem('user') != null)
                 document.getElementById("curUser").textContent = "Current User: " + localStorage.getItem('user')
             function handleUsers(type)
@@ -225,9 +212,8 @@
                 body: JSON.stringify({username: currentUser, pgs: pageIndexes, nms: pageNames, data: pageContent, rmvd: totalRemovedPages})
                 })
                 .then(response => response.json())
-                .then(data => {
-
-                })
+                .then(data => {})
+                setTimeout(save, 5000)
             }
         </script>
     </div>

@@ -1,17 +1,15 @@
-const parser = require('body-parser')
 const express = require('express');
 const app = express();
 const port = 4000;
 const cookie = require('cookie-parser')
+const ws = require('ws')
+const serv = new ws.Server({port: 4001})
 
 const { MongoClient } = require('mongodb')
 
 const config = require('./dbConfig.json')
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`
 const client = new MongoClient(url)
-const dbName = 'notepad'
-const colName = 'notes'
-const uuid = require('uuid')
 const bcrypt = require('bcrypt')
 const collection = client.db('notepad').collection('notes')
 
@@ -53,6 +51,8 @@ app.post('/reset', (req, res) => {
   let result = reset()
   result.then(function(output){res.send({output})})
 })
+
+
 
 async function reset()
 {
@@ -143,3 +143,9 @@ function setAuthCookie(res, token)
     sameSite: 'strict'
   })
 }
+//websocket
+serv.on('connection', socket => {
+  socket.on('message', message => {
+    socket.send(`${message}`)
+  })
+})

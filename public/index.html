@@ -209,7 +209,7 @@
                 })
                 .then(response => response.json())
                 .then(data => {})
-                setTimeout(save, 5000)
+                //setTimeout(save, 500)
             }
         </script>
     </div>
@@ -277,5 +277,15 @@
                 }
             }
         </script>
+    </div>
+
+    <div class="chat">
+        <ul></ul>
+        <form>
+            <input type="text" placeholder="Send a message!" id="chatBox">
+            <br>
+            <button id="sendButton" onlick="sendMsg()">Send</button>
+        </form>
+        <script defer src="websocket.js"></script>
     </div>
 </body>

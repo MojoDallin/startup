@@ -5,6 +5,11 @@ const cookie = require('cookie-parser')
 const ws = require('ws')
 const serv = new ws.Server({port: 4001})
 
+const http = require("http")
+const server = http.createServer(app)
+const { Server } = require("socket.io")
+const io = new Server(server)
+
 const { MongoClient } = require('mongodb')
 
 const config = require('./dbConfig.json')
@@ -144,8 +149,6 @@ function setAuthCookie(res, token)
   })
 }
 //websocket
-serv.on('connection', socket => {
-  socket.on('message', message => {
-    socket.send(`${message}`)
-  })
+io.on('connection', (socket) => {
+  console.log("user connected")
 })

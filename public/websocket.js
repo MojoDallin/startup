@@ -9,7 +9,7 @@ function sendMessage(e)
         user = currentUser
     if(input.value)
     {
-        socket.send(input.value)
+        socket.send(JSON.stringify({username: user, message: input.value}))
         input.value = ""
     }
     input.focus()
@@ -19,12 +19,7 @@ document.querySelector("form").addEventListener("submit", sendMessage)
 
 socket.addEventListener("message", ({data}) => {
     const li = document.createElement("li")
-    let msg = ""
-    console.log(data.value)
-    if(currentUser)
-        msg = currentUser + ": " + data
-    else
-        msg = "Guest: " + data
-    li.textContent = msg
+    let parsed = JSON.parse(data)
+    li.textContent = `${parsed.username}: ${parsed.message}`
     document.querySelector("ul").appendChild(li)
 })

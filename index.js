@@ -153,7 +153,7 @@ let clientsConnected = []
 
 wss.on('connection', (ws) => {
   clientsConnected.push(ws)
-  ws.on('message', (user, message) => {
+  ws.on('message', (message) => {
     clientsConnected.forEach(client => {
       client.send(message.toString())
     })

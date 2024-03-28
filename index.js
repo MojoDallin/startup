@@ -124,13 +124,17 @@ async function register(username, password, pgs, nms, data, rmvd)
   }
 }
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`Web service listening at port ${port}`);
 });
 
 app.use((req, res) => {
   res.sendFile('index.html', {root: './'})
 })
+
+app.get('/', (req, res) => {
+  res.sendFile('public/index.html');
+});
 
 
 function setAuthCookie(res, token)
@@ -142,10 +146,18 @@ function setAuthCookie(res, token)
   })
 }
 //websocket
-const http = require("http")
-const server = http.createServer(app)
-const { Server } = require("socket.io")
-const io = new Server(server)
-io.on('connection', (socket) => { 
-  console.log("user connected")
-})
+const WebSocket = require('ws');
+const wss = new WebSocket.Server({ server });
+
+// WebSocket connection handling
+wss.on('connection', (ws) => {
+  console.log('Client connected');
+
+  // WebSocket message handling
+  ws.on('message', (message) => {
+    console.log(`Received message: ${message}`);
+
+    // Echo the received message back to the client
+    ws.send(message);
+  });
+});

@@ -149,15 +149,13 @@ function setAuthCookie(res, token)
 const WebSocket = require('ws');
 const wss = new WebSocket.Server({ server });
 
-// WebSocket connection handling
+let clientsConnected = []
+
 wss.on('connection', (ws) => {
-  console.log('Client connected');
-
-  // WebSocket message handling
-  ws.on('message', (message) => {
-    console.log(`Received message: ${message}`);
-
-    // Echo the received message back to the client
-    ws.send(message);
+  clientsConnected.push(ws)
+  ws.on('message', (user, message) => {
+    clientsConnected.forEach(client => {
+      client.send(message.toString())
+    })
   });
 });

@@ -88,3 +88,7 @@ body {
 button {
     background-color: #EC964A;
 }
+
+ul {
+    list-style-type: none;
+}

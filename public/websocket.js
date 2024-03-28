@@ -16,6 +16,6 @@ document.querySelector("form").addEventListener("submit", sendMessage)
 
 socket.addEventListener("message", ({data}) => {
     const li = document.createElement("li")
-    li.textContent = data
+    li.textContent = currentUser + ": " + data
     document.querySelector("ul").appendChild(li)
 })

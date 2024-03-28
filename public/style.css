@@ -83,6 +83,11 @@ body {
         bottom: 120px;
         position: absolute;
     }
+    .messageList {
+        right: 20px;
+        bottom: 170px;
+        position: absolute;
+    }
 }
 
 button {

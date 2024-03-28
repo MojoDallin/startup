@@ -76,3 +76,10 @@ WebSocket Data: Allows users to save and load their notes, as their notes will b
 -Quality of life fixes and changes
 
 -Autosaves every 5 seconds, loads on page load and login
+
+### WebSocket
+-Chat window (slightly buggy at times but is functional)
+
+-Improvements
+
+-Will fix some bugs and be sure to improve it later

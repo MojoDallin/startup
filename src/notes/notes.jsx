@@ -5,14 +5,21 @@ export function Notes(props) {
     var index = 1;
     var currentPageUserIsOn = 0;
     const [user, setUser] = React.useState(localStorage.getItem('userLoggedIn'));
-    const [content, setContent] = React.useState(JSON.parse(localStorage.getItem('pageCntnt')) || ["This text will never be seen. Neat!"]);
-    const [indexes, setIndexes] = React.useState(JSON.parse(localStorage.getItem('pageIndxs')) || []);
-    const [names, setNames] = React.useState(JSON.parse(localStorage.getItem('pageNms')) || []);
-    const [removed, setRemoved] = React.useState(localStorage.getItem('totalRemoved') || 0);
+    // const [content, setContent] = React.useState(JSON.parse(localStorage.getItem('pageCntnt')) || ["This text will never be seen. Neat!"]);
+    // const [indexes, setIndexes] = React.useState(JSON.parse(localStorage.getItem('pageIndxs')) || []);
+    // const [names, setNames] = React.useState(JSON.parse(localStorage.getItem('pageNms')) || []);
+    // const [removed, setRemoved] = React.useState(localStorage.getItem('totalRemoved') || 0);
 
-    for(var i = 0; i < indexes.length; i++) {
-        index = indexes[i];
-        addPage(true, names[i]);
+    var currentPageUserIsOn = 0;
+    var totalRemovedPages = 0;
+    var pageContent = ["This text will never be seen. Isn't that cool?"];
+    var pageIndexes = [];
+    var pageNames = [];
+    var pagesMade = 0;
+
+    for(var i = 0; i < pageIndexes.length; i++) {
+        pageIndexes = pageIndexes[i];
+        addPage(true, pageNames[i]);
     }
     
     function addPage(addedFromData, title = "Page " + index) {
@@ -26,25 +33,22 @@ export function Notes(props) {
         pageContent.push("This is page " + index + ", this text will be removed later and is currently a placeholder");
 
         if(!addedFromData) {
-            indexes.push(index);
-            names.push(title);
+            pageIndexes.push(index);
+            pageNames.push(title);
             fetch('/total-created-pages')
             .then(response => response.json())
             .then(data => {
                 localStorage.setItem('totalPagesMade', data.counter); //unused but it increments counter soo
             })
         }
-        setIndexes(JSON.stringify(indexes));
-        localStorage.setItem('pageIndxs', indexes);
-        setNames(JSON.stringify(names));
-        localStorage.setItem('pageNms', names);
+        localStorage.setItem('pageIndxs', pageIndexes);
+        localStorage.setItem('pageNms', pageNames);
         index++;
     }
 
     function goToPage() {
         //Called when a user switches pages
-        setContent(JSON.stringify(content));
-        localStorage.setItem("pageCntnt", content);
+        localStorage.setItem("pageCntnt", pageContent);
         if(anotherPage.textContent != "Delete?") {
             anotherPage.style.backgroundColor = "#4AC3EC";
             if(currentPageUserIsOn > 0) {
@@ -55,11 +59,11 @@ export function Notes(props) {
                     console.log("Failure");
                 }
             }
-            content[currentPageUserIsOn] = document.getElementById("mainTextArea").value;
+            pageContent[currentPageUserIsOn] = document.getElementById("mainTextArea").value;
             currentPageUserIsOn = Number(anotherPage.id.substring(4));
             //change text content down here
             var textArea = document.getElementById("mainTextArea");
-            textArea.value = content[currentPageUserIsOn];
+            textArea.value = pageContent[currentPageUserIsOn];
         }
     }
 
@@ -76,10 +80,10 @@ export function Notes(props) {
             anotherPage.style.backgroundColor = "#EC964A";
         }, 3000)
         if(deleteIndex > 1) {
-            setRemoved(removed++);
+            removed++;
             anotherPage.remove();
-            indexes.splice(indexes.indexOf(currentPageUserIsOn), 1);
-            names.splice(currentPageUserIsOn - removed, 1);
+            pageIndexes.splice(pageIndexes.indexOf(currentPageUserIsOn), 1);
+            pageNames.splice(currentPageUserIsOn - totalRemovedPages, 1);
             currentPageUserIsOn++;
             document.getElementById("Page" + currentPageUserIsOn).style.backgroundColor = "#4AC3EC";
             var textArea = document.getElementById("mainTextArea");
@@ -200,18 +204,17 @@ export function Notes(props) {
     }
 
     return (
-<main>
-    <head>
-        <title>Personal Notepad</title>
-    </head>
-        <div class="textBox">
-            <textarea class="mainTextArea" id="mainTextArea" name="mainTextArea"></textarea>
-        </div>
+        <main>
+            <head>
+                <title>Notes</title>
+            </head>
+            <div class="textBox">
+                <textarea class="mainTextArea" id="mainTextArea" name="mainTextArea"></textarea>
+            </div>
 
-    <div class="scrollingButtons">
-        <button onclick="addPage(false)" class="newPage" id="newPage">New Page</button>
+            <div class="scrollingButtons">
+                <button onclick="addPage(false)" class="newPage" id="newPage">New Page</button>
         <script>
-            //EC964A is orange, 4AC3EC is blue, F34F4F is red
             {/* var index = 1
             var currentPageUserIsOn = 0;
             var totalRemovedPages = 0;
@@ -317,11 +320,11 @@ export function Notes(props) {
                 }
             } */}
         </script>
-    </div>
+            </div>
 
-    <div class="information">
-        <a href="information.html"><button class="infoButton">Information</button></a>
-    </div>
+            <div class="information">
+                <a href="information.html"><button class="infoButton">Information</button></a>
+            </div>
 
     <div class="loginSystem">
         <label>Username: </label>
@@ -482,6 +485,5 @@ export function Notes(props) {
         </form>
         <script defer src="websocket.js"></script>
     </div>
-</main>
-);
+    </main> );
 }

@@ -26,7 +26,7 @@ export function Information(props) {
             <head>
                 <title>Information</title>
             </head>
-            <img alt = "Logo" src="logo.png"/>
+            <img alt = "notepadapp.click" src="logo.png"/>
             <header>
                 <h1>Information</h1>
             </header>

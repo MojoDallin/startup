@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Information } from './information/information'
+import { Notes } from './notes/notes'
 import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
 import './App.css'
 
@@ -14,7 +15,7 @@ function App() {
 
       <Routes>
         <Route path='/information' element={<Information />} />
-        
+        <Route path='/notes' element={<Notes />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
     </BrowserRouter>

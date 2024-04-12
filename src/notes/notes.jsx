@@ -4,10 +4,10 @@ import './notes.css'
 export function Notes(props) {
     var index = 1;
     var currentPageUserIsOn = 0;
-    const [user, setUser] = React.useState(localStorage.getItem('userLoggedIn') || '');
-    const [content, setContent] = React.useState(localStorage.getItem('pageCntnt') || ["This text will never be seen. Neat!"]);
-    const [indexes, setIndexes] = React.useState(localStorage.getItem('pageIndxs') || []);
-    const [names, setNames] = React.useState(localStorage.getItem('pageNms') || []);
+    const [user, setUser] = React.useState(localStorage.getItem('userLoggedIn'));
+    const [content, setContent] = React.useState(JSON.parse(localStorage.getItem('pageCntnt')) || ["This text will never be seen. Neat!"]);
+    const [indexes, setIndexes] = React.useState(JSON.parse(localStorage.getItem('pageIndxs')) || []);
+    const [names, setNames] = React.useState(JSON.parse(localStorage.getItem('pageNms')) || []);
     const [removed, setRemoved] = React.useState(localStorage.getItem('totalRemoved') || 0);
 
     for(var i = 0; i < indexes.length; i++) {
@@ -35,9 +35,109 @@ export function Notes(props) {
             })
         }
         setIndexes(JSON.stringify(indexes));
+        localStorage.setItem('pageIndxs', indexes);
         setNames(JSON.stringify(names));
+        localStorage.setItem('pageNms', names);
         index++;
     }
+
+    function goToPage() {
+        //Called when a user switches pages
+        setContent(JSON.stringify(content));
+        localStorage.setItem("pageCntnt", content);
+        if(anotherPage.textContent != "Delete?") {
+            anotherPage.style.backgroundColor = "#4AC3EC";
+            if(currentPageUserIsOn > 0) {
+                try {
+                    if(document.getElementById("Page" + currentPageUserIsOn).textContent != "Delete?");
+                        document.getElementById("Page" + currentPageUserIsOn).style.backgroundColor = "#EC964A";
+                } catch(ex) {
+                    console.log("Failure");
+                }
+            }
+            content[currentPageUserIsOn] = document.getElementById("mainTextArea").value;
+            currentPageUserIsOn = Number(anotherPage.id.substring(4));
+            //change text content down here
+            var textArea = document.getElementById("mainTextArea");
+            textArea.value = content[currentPageUserIsOn];
+        }
+    }
+
+    var deleteIndex = 0;
+    function deletePage() {
+        //Called when a user wants to delete a page
+        var oldName = anotherPage.textContent;
+        anotherPage.textContent = "Delete?";
+        anotherPage.style.backgroundColor = "#F34F4F";  
+        deleteIndex++;
+        setTimeout(() => {
+            anotherPage.textContent = oldName;
+            deleteIndex = 0;
+            anotherPage.style.backgroundColor = "#EC964A";
+        }, 3000)
+        if(deleteIndex > 1) {
+            setRemoved(removed++);
+            anotherPage.remove();
+            indexes.splice(indexes.indexOf(currentPageUserIsOn), 1);
+            names.splice(currentPageUserIsOn - removed, 1);
+            currentPageUserIsOn++;
+            document.getElementById("Page" + currentPageUserIsOn).style.backgroundColor = "#4AC3EC";
+            var textArea = document.getElementById("mainTextArea");
+            textArea.value = pageContent[currentPageUserIsOn];
+            localStorage.setItem("pageIndxs", JSON.stringify(pageIndexes));
+            localStorage.setItem("pageNms", JSON.stringify(pageNames));
+            localStorage.setItem("totalRemoved", totalRemovedPages);
+        }
+    }
+    ////////
+    if(user) {
+        save()
+        document.getElementById("curUser").textContent = "Current User: " + localStorage.getItem('user')
+    }
+
+    function handleUsers(type) {
+        //Called when a user logs in
+        if(!document.getElementById("name").value || !document.getElementById("password").value) {
+            document.getElementById("extra").textContent = "Credentials missing!"
+            setTimeout(() => {
+                document.getElementById("extra").textContent = ""
+            }, 1500)
+            return
+        }
+        let user = document.getElementById("name").value
+        let pass = document.getElementById("password").value
+        let bdy = JSON.stringify({username: user, password: pass, pages: pageIndexes, pageNames: pageNames, noteData: pageContent, removed: totalRemovedPages})
+        document.getElementById("extra").textContent = "Thinking..."
+        fetch(type, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: bdy
+        })
+        .then(response => response.json())
+        .then(data => {
+            if(data.output.message) {
+                document.getElementById("extra").textContent = data.output.message
+                localStorage.setItem("pageCntnt", JSON.stringify(data.output.noteData))
+                localStorage.setItem("pageIndxs", JSON.stringify(data.output.pages))
+                localStorage.setItem("pageNms", JSON.stringify(data.output.pageNames))
+                localStorage.setItem("totalRemoved", data.output.removed)
+                currentUser = data.output.username
+                localStorage.setItem("userLoggedIn", data.output.username)
+                location.reload()
+            }
+            else
+                document.getElementById("extra").textContent = data.output
+            if(document.getElementById("extra").textContent === "Successfully logged in.")
+            {
+                document.getElementById("curUser").textContent = "Current User: " + user
+                localStorage.setItem('user', user)
+            }
+            setTimeout(() => {
+                document.getElementById ("extra").textContent = ""
+            }, 1500)
+        })
+    }
+
 
     return (
 <main>
@@ -50,7 +150,6 @@ export function Notes(props) {
 
     <div class="scrollingButtons">
         <button onclick="addPage(false)" class="newPage" id="newPage">New Page</button>
-
         <script>
             //EC964A is orange, 4AC3EC is blue, F34F4F is red
             {/* var index = 1
@@ -78,30 +177,30 @@ export function Notes(props) {
                 addPage(true, pageNames[i])
                 //localStorage.clear()
             } */}
-            function addPage(addedFromData, title = "Page " + index)
+            {/* function addPage(addedFromData, title = "Page " + index)
             {
                 //Called when New Page is clicked
-                // var anotherPage = document.createElement("button");
-                // anotherPage.textContent = title;
-                // anotherPage.id = "Page" + index;
-                // anotherPage.addEventListener("click", goToPage);
-                // anotherPage.addEventListener("dblclick", deletePage);
-                // anotherPage.style.backgroundColor = "#EC964A";
-                // document.querySelector(".scrollingButtons").append(anotherPage);
-                // pageContent.push("This is page " + index + ", this text will be removed later and is currently a placeholder");
-                // if(!addedFromData)
-                // {
-                //     pageIndexes.push(index);
-                //     pageNames.push(title);
-                //     fetch('/total-created-pages')
-                //     .then(response => response.json())
-                //     .then(data => {
-                //         localStorage.setItem('totalPagesMade', data.counter); //unused but it increments counter soo
-                //     })
-                // }
-                // localStorage.setItem("pageIndxs", JSON.stringify(pageIndexes))
-                // localStorage.setItem("pageNms", JSON.stringify(pageNames))
-                // index++;
+                var anotherPage = document.createElement("button");
+                anotherPage.textContent = title;
+                anotherPage.id = "Page" + index;
+                anotherPage.addEventListener("click", goToPage);
+                anotherPage.addEventListener("dblclick", deletePage);
+                anotherPage.style.backgroundColor = "#EC964A";
+                document.querySelector(".scrollingButtons").append(anotherPage);
+                pageContent.push("This is page " + index + ", this text will be removed later and is currently a placeholder");
+                if(!addedFromData)
+                {
+                    pageIndexes.push(index);
+                    pageNames.push(title);
+                    fetch('/total-created-pages')
+                    .then(response => response.json())
+                    .then(data => {
+                        localStorage.setItem('totalPagesMade', data.counter); //unused but it increments counter soo
+                    })
+                }
+                localStorage.setItem("pageIndxs", JSON.stringify(pageIndexes))
+                localStorage.setItem("pageNms", JSON.stringify(pageNames))
+                index++;
                 function goToPage()
                 {
                     //Called when a user switches pages
@@ -156,7 +255,7 @@ export function Notes(props) {
                         localStorage.setItem("totalRemoved", totalRemovedPages)
                     }
                 }
-            }
+            } */}
         </script>
     </div>
 
@@ -167,26 +266,26 @@ export function Notes(props) {
     <div class="loginSystem">
         <label>Username: </label>
         <input class="usernameInput" style="background-color: transparent" type="text" id="name" name="name" size="10" maxlength="10"/>
-        <br>
+        <br/>
         <label>Password: </label>
         <input class="passwordInput" style="background-color: transparent; margin-left: 5px;" type="password" id="password" name="password" size="10" maxlength="10"/>
-        <br>
+        <br/>
         <label id="curUser">Current User: </label>
-        <br>
+        <br/>
         <button class="loginButton" onclick="handleUsers('/login')">Log In</button>
         <button class="logoutButton" onclick="logout()">Log Out</button>
-        <br>
+        <br/>
         <button class="signupButton" onclick="handleUsers('/register')">Sign Up</button>
-        <br>
+        <br/>
         <label id="extra"></label>
-        <br>
+        <br/>
         <script id="scriptLoader" type="application/javascript"></script>
         <script>
-            if(currentUser)
+            {/* if(currentUser)
                 save()
             if(localStorage.getItem('user') != null)
-                document.getElementById("curUser").textContent = "Current User: " + localStorage.getItem('user')
-            function handleUsers(type)
+                document.getElementById("curUser").textContent = "Current User: " + localStorage.getItem('user') */}
+            {/* function handleUsers(type)
             {
                 //Called when a user logs in
                 if(!document.getElementById("name").value || !document.getElementById("password").value)
@@ -230,7 +329,7 @@ export function Notes(props) {
                         document.getElementById ("extra").textContent = ""
                     }, 1500)
                 })
-            }
+            } */}
             function logout()
             {
                 localStorage.clear()

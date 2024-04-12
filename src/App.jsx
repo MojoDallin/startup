@@ -12,6 +12,9 @@ function App() {
       <NavLink className='nav-link' to='information'>
         Information
       </NavLink>
+      <NavLink className='nav-link' to='notes'>
+        Notes
+      </NavLink>
 
       <Routes>
         <Route path='/information' element={<Information />} />

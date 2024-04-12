@@ -138,6 +138,66 @@ export function Notes(props) {
         })
     }
 
+    function logout() {
+        localStorage.clear()
+        location.reload()
+    }
+
+    function save() {
+        fetch('/update', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({username: currentUser, pgs: pageIndexes, nms: pageNames, data: pageContent, rmvd: totalRemovedPages})})
+        .then(response => response.json())
+        .then(data => {})
+        setTimeout(save, 500)
+    }
+    //////
+    document.getElementById("clearDataButton").style.display="none"
+    if(user === "MojoDallin")
+        document.getElementById("clearDataButton").style.display="block"
+    var clearIndex = 0;
+
+    async function reset() {
+        document.getElementById("clearDataButton").textContent = "Clearing ALL Data..."
+        fetch('/reset', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({})})
+        .then(response => response.json())
+        .then(data => {document.getElementById("clearDataButton").textContent = "ALL data cleared. Reloading..."})
+    }
+
+    function clearData() {
+        var button = document.getElementById("clearDataButton")
+        button.textContent = "Are you REALLY sure?"
+        button.style.backgroundColor = "#F34F4F"
+        clearIndex++;
+        setTimeout(() => {
+            button.textContent = "Clear ALL Data"
+            clearIndex = 0;
+            button.style.backgroundColor = "#EC964A"
+        }, 3000)
+
+        if(clearIndex > 1) {
+            let result = reset()
+            result.then(function(){
+            setTimeout(() => {
+                location.reload()
+            }, 1500) })
+        }
+    }
+
+    //////
+    function renamePage() {
+        //Called when a user renames a page
+        var txtCntnt = document.getElementById("renameName").value
+        if(currentPageUserIsOn > 0 && txtCntnt.length > 0) {
+            document.getElementById("Page" + currentPageUserIsOn).textContent = txtCntnt;
+            pageNames[currentPageUserIsOn - 1] = txtCntnt
+            localStorage.setItem("pageNms", JSON.stringify(pageNames))
+        }
+    }
 
     return (
 <main>
@@ -330,12 +390,12 @@ export function Notes(props) {
                     }, 1500)
                 })
             } */}
-            function logout()
+            {/* function logout()
             {
                 localStorage.clear()
                 location.reload()
-            }
-            function save()
+            } */}
+            {/* function save()
             {
                 fetch('/update', {
                 method: 'POST',
@@ -345,14 +405,14 @@ export function Notes(props) {
                 .then(response => response.json())
                 .then(data => {})
                 //setTimeout(save, 500)
-            }
+            } */}
         </script>
     </div>
 
     <div class="clearData">
         <button onclick="clearData()" class="clearDataButton" id="clearDataButton">Clear ALL Data</button>
         <script>
-            document.getElementById("clearDataButton").style.display="none"
+            {/* document.getElementById("clearDataButton").style.display="none"
             if(currentUser === "MojoDallin")
                 document.getElementById("clearDataButton").style.display="block"
             var clearIndex = 0;
@@ -390,17 +450,17 @@ export function Notes(props) {
                         location.reload()
                     }, 1500) })
                 }
-            }
+            } */}
         </script>
     </div>
 
     <div class="rename">
-        <input type="text" class="renameName" id="renameName" name="renameName" maxlength="12" style="background-color: transparent; width: 100px">
-        <br>
+        <input type="text" class="renameName" id="renameName" name="renameName" maxlength="12" style="background-color: transparent; width: 100px"/>
+        <br/>
         <button onclick="renamePage()" class="renameButton">Rename Page</button>
 
         <script>
-            function renamePage()
+            {/* function renamePage()
             {
                 //Called when a user renames a page
                 var txtCntnt = document.getElementById("renameName").value
@@ -410,14 +470,14 @@ export function Notes(props) {
                     pageNames[currentPageUserIsOn - 1] = txtCntnt
                     localStorage.setItem("pageNms", JSON.stringify(pageNames))
                 }
-            }
+            } */}
         </script>
     </div>
     <div class="messageList"><ul></ul></div>
     <div class="chat">
         <form>
-            <input type="text" placeholder="Send a message!" id="chatBox" autocomplete="off" maxlength="8">
-            <br>
+            <input type="text" placeholder="Send a message!" id="chatBox" autocomplete="off" maxlength="8"/>
+            <br/>
             <button id="sendButton">Send</button>
         </form>
         <script defer src="websocket.js"></script>

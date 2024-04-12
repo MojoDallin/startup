@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import { Information } from '../public/information'
-import { Notes } from '../public/notes'
+//import { information } from '../public/information'
+//import { notes } from '../public/notes'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './App.css'
 
@@ -33,8 +33,8 @@ function App() {
       </p>
 
       <Routes>
-        <Route path='/information' element={<Information />} />
-        <Route path='/notes' element={<Notes />} />
+        <Route path='/information' element={<information />} />
+        <Route path='/notes' element={<notes />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
     </BrowserRouter>

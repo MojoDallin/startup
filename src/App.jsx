@@ -1,6 +1,9 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
+import { Information } from '../public/information'
+import { Notes } from '../public/notes'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './App.css'
 
 function App() {
@@ -28,8 +31,18 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
+
+      <Routes>
+        <Route path='/information' element={<Information />} />
+        <Route path='/notes' element={<Notes />} />
+        <Route path='*' element={<NotFound />} />
+      </Routes>
     </BrowserRouter>
   )
+}
+
+function NotFound() {
+  return <main className='pageNotFound'>404: Page not found. How did you end up here?</main>;
 }
 
 export default App

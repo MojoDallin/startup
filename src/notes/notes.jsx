@@ -1,16 +1,31 @@
-<body>
-    <link rel="stylesheet" href="style.css">
+import React from 'react'
+import './notes.css'
+
+export function Notes(props) {
+    var index = 1;
+    const [user, setUser] = React.useState(localStorage.getItem('userLoggedIn') || '');
+    const [content, setContent] = React.useState(localStorage.getItem('pageCntnt') || ["This text will never be seen. Neat!"]);
+    const [indexes, setIndexes] = React.useState(localStorage.getItem('pageIndxs') || []);
+    const [names, setNames] = React.useState(localStorage.getItem('pageNms') || []);
+    const [removed, setRemoved] = React.useState(localStorage.getItem('totalRemoved') || 0);
+
+    for(var i = 0; i < indexes.length; i++) {
+        index = indexes[i];
+        addPage(true, names[i]);
+    }
+
+
+    return (
+<main>
     <head>
         <title>Personal Notepad</title>
     </head>
-    <main>
         <div class="textBox">
             <textarea class="mainTextArea" id="mainTextArea" name="mainTextArea"></textarea>
         </div>
-    </main>
 
     <div class="scrollingButtons">
-        <button onclick="addPage(false)" class="newPage" id="newPage" style="background-color: #EC964A;">New Page</button>
+        <button onclick="addPage(false)" class="newPage" id="newPage">New Page</button>
 
         <script>
             //EC964A is orange, 4AC3EC is blue, F34F4F is red
@@ -287,4 +302,6 @@
         </form>
         <script defer src="websocket.js"></script>
     </div>
-</body>
+</main>
+);
+}

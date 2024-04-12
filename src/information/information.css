@@ -13,3 +13,7 @@ button {
 ul {
     list-style-type: none;
 }
+
+footer {
+    font-style: italic;
+}

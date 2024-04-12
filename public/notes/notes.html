@@ -24,13 +24,13 @@
             var currentUser = null
             if(localStorage.getItem("userLoggedIn"))
                 currentUser = localStorage.getItem("userLoggedIn")
-            if(localStorage.getItem("pageCntnt") != null)
+            if(localStorage.getItem("pageCntnt"))
                 pageContent = JSON.parse(localStorage.getItem("pageCntnt"))
-            if(localStorage.getItem("pageIndxs") != null)
+            if(localStorage.getItem("pageIndxs"))
                 pageIndexes = JSON.parse(localStorage.getItem("pageIndxs"))
-            if(localStorage.getItem("pageNms") != null)
+            if(localStorage.getItem("pageNms"))
                 pageNames = JSON.parse(localStorage.getItem("pageNms"))
-            if(localStorage.getItem("totalRemoved") != null)
+            if(localStorage.getItem("totalRemoved"))
                 totalRemovedPages = Number(localStorage.getItem("totalRemoved"))
             
             

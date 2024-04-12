@@ -3,6 +3,7 @@ import './notes.css'
 
 export function Notes(props) {
     var index = 1;
+    var currentPageUserIsOn = 0;
     const [user, setUser] = React.useState(localStorage.getItem('userLoggedIn') || '');
     const [content, setContent] = React.useState(localStorage.getItem('pageCntnt') || ["This text will never be seen. Neat!"]);
     const [indexes, setIndexes] = React.useState(localStorage.getItem('pageIndxs') || []);
@@ -13,7 +14,30 @@ export function Notes(props) {
         index = indexes[i];
         addPage(true, names[i]);
     }
+    
+    function addPage(addedFromData, title = "Page " + index) {
+        var anotherPage = document.createElement("button");
+        anotherPage.textContent = title;
+        anotherPage.id = "Page" + index;
+        anotherPage.addEventListener("click", goToPage);
+        anotherPage.addEventListener("dblclick", deletePage);
+        anotherPage.style.backgroundColor = "#EC964A";
+        document.querySelector(".scrollingButtons").append(anotherPage);
+        pageContent.push("This is page " + index + ", this text will be removed later and is currently a placeholder");
 
+        if(!addedFromData) {
+            indexes.push(index);
+            names.push(title);
+            fetch('/total-created-pages')
+            .then(response => response.json())
+            .then(data => {
+                localStorage.setItem('totalPagesMade', data.counter); //unused but it increments counter soo
+            })
+        }
+        setIndexes(JSON.stringify(indexes));
+        setNames(JSON.stringify(names));
+        index++;
+    }
 
     return (
 <main>
@@ -29,7 +53,7 @@ export function Notes(props) {
 
         <script>
             //EC964A is orange, 4AC3EC is blue, F34F4F is red
-            var index = 1
+            {/* var index = 1
             var currentPageUserIsOn = 0;
             var totalRemovedPages = 0;
             var pageContent = ["This text will never be seen. Isn't that cool?"];
@@ -47,40 +71,37 @@ export function Notes(props) {
                 pageNames = JSON.parse(localStorage.getItem("pageNms"))
             if(localStorage.getItem("totalRemoved"))
                 totalRemovedPages = Number(localStorage.getItem("totalRemoved"))
-            
-            
-            var maxNum = pageIndexes.length
+                
             for(var i = 0; i < pageIndexes.length; i++)
             {
                 index = pageIndexes[i]
                 addPage(true, pageNames[i])
                 //localStorage.clear()
-            }
+            } */}
             function addPage(addedFromData, title = "Page " + index)
             {
                 //Called when New Page is clicked
-                var anotherPage = document.createElement("button");
-                anotherPage.textContent = title;
-                anotherPage.id = "Page" + index;
-                anotherPage.addEventListener("click", goToPage);
-                anotherPage.addEventListener("dblclick", deletePage);
-                anotherPage.style.backgroundColor = "#EC964A";
-                document.querySelector(".scrollingButtons").append(anotherPage);
-                pageContent.push("This is page " + index + ", this text will be removed later and is currently a placeholder");
-                if(!addedFromData)
-                {
-                    pageIndexes.push(index);
-                    pageNames.push(title);
-                    fetch('/total-created-pages')
-                    .then(response => response.json())
-                    .then(data => {
-                        localStorage.setItem('totalPagesMade', data.counter); //unused but it increments counter soo
-                    })
-
-                }
-                localStorage.setItem("pageIndxs", JSON.stringify(pageIndexes))
-                localStorage.setItem("pageNms", JSON.stringify(pageNames))
-                index++;
+                // var anotherPage = document.createElement("button");
+                // anotherPage.textContent = title;
+                // anotherPage.id = "Page" + index;
+                // anotherPage.addEventListener("click", goToPage);
+                // anotherPage.addEventListener("dblclick", deletePage);
+                // anotherPage.style.backgroundColor = "#EC964A";
+                // document.querySelector(".scrollingButtons").append(anotherPage);
+                // pageContent.push("This is page " + index + ", this text will be removed later and is currently a placeholder");
+                // if(!addedFromData)
+                // {
+                //     pageIndexes.push(index);
+                //     pageNames.push(title);
+                //     fetch('/total-created-pages')
+                //     .then(response => response.json())
+                //     .then(data => {
+                //         localStorage.setItem('totalPagesMade', data.counter); //unused but it increments counter soo
+                //     })
+                // }
+                // localStorage.setItem("pageIndxs", JSON.stringify(pageIndexes))
+                // localStorage.setItem("pageNms", JSON.stringify(pageNames))
+                // index++;
                 function goToPage()
                 {
                     //Called when a user switches pages

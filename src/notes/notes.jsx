@@ -5,31 +5,29 @@ export function Notes(props) {
     var index = 1;
     var currentPageUserIsOn = 0;
     const [user, setUser] = React.useState(localStorage.getItem('userLoggedIn'));
-    // const [content, setContent] = React.useState(JSON.parse(localStorage.getItem('pageCntnt')) || ["This text will never be seen. Neat!"]);
-    // const [indexes, setIndexes] = React.useState(JSON.parse(localStorage.getItem('pageIndxs')) || []);
-    // const [names, setNames] = React.useState(JSON.parse(localStorage.getItem('pageNms')) || []);
-    // const [removed, setRemoved] = React.useState(localStorage.getItem('totalRemoved') || 0);
 
     var currentPageUserIsOn = 0;
     var totalRemovedPages = 0;
     var pageContent = ["This text will never be seen. Isn't that cool?"];
     var pageIndexes = [];
     var pageNames = [];
-    var pagesMade = 0;
-
-    for(var i = 0; i < pageIndexes.length; i++) {
-        pageIndexes = pageIndexes[i];
-        addPage(true, pageNames[i]);
+    window.onload = function() {
+        for(var i = 0; i < pageIndexes.length; i++) {
+            pageIndexes = pageIndexes[i];
+            addPage(true, pageNames[i]);
+        }
     }
     
+    
     function addPage(addedFromData, title = "Page " + index) {
+        console.log(title)
         var anotherPage = document.createElement("button");
         anotherPage.textContent = title;
         anotherPage.id = "Page" + index;
         anotherPage.addEventListener("click", goToPage);
         anotherPage.addEventListener("dblclick", deletePage);
         anotherPage.style.backgroundColor = "#EC964A";
-        document.getElementsByClassName(".scrollingButtons").append(anotherPage);
+        document.getElementsByClassName("scrollingButtons").append(anotherPage);
         pageContent.push("This is page " + index + ", this text will be removed later and is currently a placeholder");
 
         if(!addedFromData) {
@@ -99,8 +97,9 @@ export function Notes(props) {
         document.getElementById("curUser").textContent = "Current User: " + localStorage.getItem('user')
     }
 
-    function handleUsers(type) {
+    function handleUsers(type, targ) {
         //Called when a user logs in
+        console.log(targ)
         if(!document.getElementById("name").value || !document.getElementById("password").value) {
             document.getElementById("extra").textContent = "Credentials missing!"
             setTimeout(() => {
@@ -211,8 +210,8 @@ export function Notes(props) {
                 <textarea class="mainTextArea" id="mainTextArea" name="mainTextArea"></textarea>
             </div>
 
-            <div class="scrollingButtons">
-                <button onClick={addPage(false)} class="newPage" id="newPage">New Page</button>
+            <div class="scrollingButtons" id="scrollingButtons">
+                <button onClick={(e) => addPage(false, e)} class="newPage" id="newPage">New Page</button>
             </div>
 
             <div class="information">
@@ -231,7 +230,7 @@ export function Notes(props) {
                 <button class="loginButton" onClick={handleUsers('/login')}>Log In</button>
                 <button class="logoutButton" onClick={logout()}>Log Out</button>
                 <br/>
-                <button class="signupButton" onClick={handleUsers('/register')}>Sign Up</button>
+                <button class="signupButton" onClick={(e) => handleUsers('/register', e)}>Sign Up</button>
                 <br/>
                 <label id="extra"></label>
                 <br/>

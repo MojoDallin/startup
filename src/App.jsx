@@ -1,20 +1,26 @@
 import { useState } from 'react'
+import React from 'react'
 import { Information } from './information/information'
 import { Notes } from './notes/notes'
 import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
 import './App.css'
 
 function App() {
-  const [username, setUsername] = useState(localStorage.getItem('userLoggedIn') || '')
-
+  
   return (
     <BrowserRouter>
-      <NavLink className='nav-link' to='information'>
-        Information
-      </NavLink>
-      <NavLink className='nav-link' to='notes'>
-        Notes
-      </NavLink>
+      <header className='container-fluid'>
+        <nav className='navbar'>
+          <menu className='navbar-nav'>
+            <NavLink className='nav-link' to='information'>
+              Information
+            </NavLink>
+            <NavLink className='nav-link' to='notes'>
+              Notes
+            </NavLink>
+          </menu>
+        </nav>
+      </header>
 
       <Routes>
         <Route path='/information' element={<Information />} />

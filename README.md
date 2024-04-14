@@ -1,13 +1,11 @@
-# React + Vite
+Elevator Pitch
+Have you ever been typing notes on your computer to save them for an important presentation tomorrow, and right as you get to the office, you realize you forgot to print them, and you can't access them at the office? This is the perfect website for that accident; as long as you have an account and your notes are stored under your account, you can access them from any web browser once you log in. It's simple and easy to use with an intuitive user-interface that allows for multiple pages with stress-free organization. It's a very easy website to learn and you will get accustomed to the simplistic yet useful functions of it within a matter of minutes.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Key Features
+-Type anything, anywhere in the text area
 
-Currently, two official plugins are available:
+-Accessible from any browser
 
-<<<<<<< HEAD
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-=======
 -Easy organization
 
 -Simplistic and elegant style
@@ -86,4 +84,7 @@ WebSocket Data: Allows users to save and load their notes, as their notes will b
 -Will fix some bugs and be sure to improve it later
 
 
->>>>>>> cf71862e7c367bfbc9518421692004217244bd7b
+### React
+-Attempted to rework frontend for main page, however some buttons dont work
+
+-Does work with React and is bundled with Vite

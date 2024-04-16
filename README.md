@@ -1,4 +1,4 @@
-Elevator Pitch
+# Elevator Pitch
 Have you ever been typing notes on your computer to save them for an important presentation tomorrow, and right as you get to the office, you realize you forgot to print them, and you can't access them at the office? This is the perfect website for that accident; as long as you have an account and your notes are stored under your account, you can access them from any web browser once you log in. It's simple and easy to use with an intuitive user-interface that allows for multiple pages with stress-free organization. It's a very easy website to learn and you will get accustomed to the simplistic yet useful functions of it within a matter of minutes.
 
 Key Features
@@ -85,6 +85,6 @@ WebSocket Data: Allows users to save and load their notes, as their notes will b
 
 
 ### React
--Attempted to rework frontend for main page, however some buttons dont work
+-Attempted to rework frontend for main page, generally did with less functionality and for some reason deployment doesnt work despite working on local server
 
 -Does work with React and is bundled with Vite
